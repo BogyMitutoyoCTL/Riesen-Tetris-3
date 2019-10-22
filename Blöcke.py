@@ -25,18 +25,26 @@ class Testrisblock:
             self.orientation = 3
 
 
+L = Testrisblock(
+    [[[1, 1, 0, ],
+      [0, 1, 0, ],
+      [0, 1, 0]],
 
-list1 = [[1, 1, 0, ], [0, 1, 0, ], [0, 1, 0]]
-list2 = [[0, 0, 0], [1, 1, 1], [1, 0, 0]]
-list3 = [[0, 1, 0], [0, 1, 0], [0, 1, 1]]
-list4 = [[0, 0, 1], [1, 1, 1], [0, 0, 0]]
-alphalist = [list1, list2, list3, list4]
-L = Testrisblock(alphalist)
-L.showme()
-L.turnright()
-L.showme()
-L.turnright()
-L.showme()
+     [[0, 0, 0],
+      [1, 1, 1],
+      [1, 0, 0]],
+
+     [[0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 1]],
+
+     [[0, 0, 1],
+      [1, 1, 1],
+      [0, 0, 0]]])
+
+
+
+block_for_testing = L
 for Test in range(0,11):
-    L.turnright()
-    L.showme()
+    block_for_testing.turnright()
+    block_for_testing.showme()
