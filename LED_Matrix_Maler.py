@@ -117,6 +117,10 @@ if __name__ == "__main__":
     parser.add_argument('--reverse-order', type=bool, default=False, help='Set to true if blocks are in reverse order')
 
     args = parser.parse_args()
+    args.block_orientation = -90
+    args.rotate = 2
+    args.cascaded = 4
+
 
     try:
         demo(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
