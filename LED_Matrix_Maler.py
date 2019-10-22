@@ -22,51 +22,7 @@ def demo(n, block_orientation, rotate, inreverse):
                      rotate=rotate or 0, blocks_arranged_in_reverse_order=inreverse)
 
     msg = "Hallo"
-    show_message(device, msg, fill="white")
-
-    time.sleep(1)
-    with canvas(device) as draw:
-        text(draw, (0, 0), "A", fill="white")
-
-    time.sleep(1)
-    for _ in range(5):
-        for intensity in range(16):
-            device.contrast(intensity * 16)
-            time.sleep(0.1)
-
-    device.contrast(0x80)
-    time.sleep(1)
-
-    msg = "Alternative font!"
-    print(msg)
-    show_message(device, msg, fill="white", font=SINCLAIR_FONT)
-
-    time.sleep(1)
-    msg = "Proportional font - characters are squeezed together!"
-    print(msg)
     show_message(device, msg, fill="white", font=proportional(SINCLAIR_FONT))
-
-    # http://www.squaregear.net/fonts/tiny.shtml
-    time.sleep(1)
-    msg = "Tiny is, I believe, the smallest possible font \
-    (in pixel size). It stands at a lofty four pixels \
-    tall (five if you count descenders), yet it still \
-    contains all the printable ASCII characters."
-    msg = re.sub(" +", " ", msg)
-    print(msg)
-    show_message(device, msg, fill="white", font=proportional(TINY_FONT))
-
-    time.sleep(1)
-    msg = "CP437 Characters"
-    print(msg)
-    show_message(device, msg)
-
-    time.sleep(1)
-    for x in range(256):
-        with canvas(device) as draw:
-            text(draw, (0, 0), chr(x), fill="white")
-            time.sleep(0.1)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='matrix_demo arguments',
