@@ -11,9 +11,3 @@ class RandomBlock:
         RndBlock= Tetrisblock.Blocklist[R]
         return RndBlock
 
-Objekt=RandomBlock()
-RndBlock=Objekt.get_random_block()
-block_for_testing =RndBlock
-for Test in range(0,11):
-    block_for_testing.turnright()
-    block_for_testing.showme()
