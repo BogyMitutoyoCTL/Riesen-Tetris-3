@@ -1,7 +1,7 @@
 class Tetrisblock:
-    def __init__(self, alphalist):
-        self.color = (100, 0, 20)
-        self.posotion = (3, 5)
+    def __init__(self, alphalist, color):
+        self.color = color
+        self.position = (3, 5)
         self.orientations = alphalist
         self.orientation = 0
 
@@ -40,7 +40,7 @@ L = Tetrisblock(
 
      [[0, 0, 1],
       [1, 1, 1],
-      [0, 0, 0]]])
+      [0, 0, 0]]],(0, 255, 255))
 
 Z=Tetrisblock(
     [[[0,0,0],
@@ -57,7 +57,7 @@ Z=Tetrisblock(
 
      [[0,1,0],
       [1,1,0],
-      [1,0,0]]])
+      [1,0,0]]],(255, 0, 255))
 
 T=Tetrisblock(
     [[[1,1,1],
@@ -74,7 +74,7 @@ T=Tetrisblock(
 
      [[0,0,1],
       [0,1,1],
-      [0,0,1]]])
+      [0,0,1]]],(0, 255, 0))
 
 Lr=Tetrisblock(
     [[[1,1,0],
@@ -91,7 +91,7 @@ Lr=Tetrisblock(
 
      [[1,1,1],
       [0,0,1],
-      [0,0,0]]])
+      [0,0,0]]],(0, 0, 255))
 
 Zr=Tetrisblock(
     [[[0,0,0],
@@ -108,7 +108,7 @@ Zr=Tetrisblock(
 
      [[1,0,0],
       [1,1,0],
-      [0,1,0]]])
+      [0,1,0]]],(255, 0, 0))
 
 I=Tetrisblock(
     [[[0,1,0,0],
@@ -129,7 +129,7 @@ I=Tetrisblock(
     [[0,0,0,0],
      [1,1,1,1],
      [0,0,0,0],
-     [0,0,0,0]]])
+     [0,0,0,0]]],(255, 255, 0))
 
 B=Tetrisblock(
     [[[0,0,0,0],
@@ -150,7 +150,7 @@ B=Tetrisblock(
     [[0,0,0,0],
     [0,1,1,0],
     [0,1,1,0],
-    [0,0,0,0]]])
+    [0,0,0,0]]],(255, 127, 39))
 
 Blocklist=[L,Z,T,Lr,Zr,I,B]
 
