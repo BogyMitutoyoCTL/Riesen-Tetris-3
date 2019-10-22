@@ -1,5 +1,5 @@
 from random import randint
-import Blöcke
+import Tetrisblock
 
 class RandomBlock:
     def __init__(self):
@@ -8,7 +8,7 @@ class RandomBlock:
 
     def get_random_block(self):
         R=randint(self.minimum, self.maximum)
-        RndBlock= Blöcke.Blocklist[R]
+        RndBlock= Tetrisblock.Blocklist[R]
         return RndBlock
 
 Objekt=RandomBlock()
