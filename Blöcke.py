@@ -152,7 +152,6 @@ B=Tetrisblock(
     [0,1,1,0],
     [0,0,0,0]]])
 
-block_for_testing = B
-for Test in range(0,11):
-    block_for_testing.turnright()
-    block_for_testing.showme()
+Blocklist=[L,Z,T,Lr,Zr,I,B]
+
+
