@@ -22,8 +22,9 @@ def demo():
                      rotate=2, blocks_arranged_in_reverse_order=False)
 
     msg = "Hallo"
-    show_message(device, msg, fill="white", font=proportional(SINCLAIR_FONT))
-
+    with canvas (device) as draw:
+        text(draw, (0,0), msg, fill="white", font=proportional(SINCLAIR_FONT))
+    time.sleep(10)
 if __name__ == "__main__":
 
 
