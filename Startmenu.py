@@ -1,3 +1,4 @@
+
 import time
 
 import Playground
@@ -71,4 +72,4 @@ playground.set_pixel(9, 8, (255, 127, 39))
 
 painter = Ws2812Painter.Ws2812Painter()
 painter.paint(playground)
-time.sleep(100)
+time.sleep(10000)
