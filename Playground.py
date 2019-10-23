@@ -1,5 +1,5 @@
 import time
-
+import RandomBlock
 import Tetrisblock
 import Ws2812Painter
 
@@ -33,7 +33,7 @@ class Playground:
 
         self.height = height
         self.width = width
-        self.current_block = None
+
 
     def clear(self):
         self.coordinate_system = list()
@@ -43,7 +43,6 @@ class Playground:
                 rowlist.append(BLACK)
 
             self.coordinate_system.append(rowlist)
-        self.current_block = None
 
     def put_block(self, tetrisblock: Tetrisblock):
         c = tetrisblock.color
@@ -71,19 +70,3 @@ class Playground:
                     self.coordinate_system[row_x + tetris_y][column_x + tetris_x] = BLACK
                 column_x = column_x + 1
             row_x = row_x + 1
-
-# playground=Playground(width=10, height=20)
-# tetrisblock=Tetrisblock.B
-# tetrisblock.position = (6, 4)
-# playground.put_block(tetrisblock)
-# tetrisblock=Tetrisblock.Z
-
-# playground.put_block(tetrisblock)
-# ws2812painter= Ws2812Painter.Ws2812Painter()
-
-# ws2812painter.paint(playground)
-# time.sleep(3)
-# playground.remove_block(tetrisblock)
-# ws2812painter.paint(playground)
-
-# time.sleep(100)
