@@ -3,19 +3,21 @@ import RandomBlock
 import Ws2812Painter
 import LED_Matrix_Maler
 import time
-# import pygame
+import pygame
 # import Points
 # import Music
 import Tetrisblock
+import control_feedback
 
 # import Sound
 # import control_feedback
+clock = pygame.time.Clock()
 leonardo = LED_Matrix_Maler.Painter()
 tetrisblock = Tetrisblock.Tetrisblock
 playground = Playground.Playground(10, 20)
 
 objekt = RandomBlock.RandomBlock()
-
+controller = control_feedback.Controller()
 currentBlock = objekt.get_random_block()
 nextBlock = objekt.get_random_block()
 
@@ -45,8 +47,15 @@ while True:
         currentBlock = nextBlock
         y = 0
         nextBlock = objekt.get_random_block()
+    for _ in range(4):
+        buttons = controller.pressed()
+        if "right" in buttons:
+            x = x + 1
+        if "left" in buttons:
+            x = x - 1
+        clock.tick(4)
+
     currentBlock.position = x, y + 1
     playground.put_block(currentBlock)
-    time.sleep(0.2)
 
     painter.paint(playground)
