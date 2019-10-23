@@ -16,8 +16,23 @@ class Maler():
         msg = str(points)
         with canvas(device) as draw:
             text(draw, (0, 0), msg, fill="white", font=proportional(SINCLAIR_FONT))
+            self.put_block(block,draw)
 
+    def put_block(self, tetrisblock, draw):
+
+
+        tetris_x=29
+        tetris_y=2
+        templist = tetrisblock.orientations[tetrisblock.orientation]
+        row_y = 0
+        for row in templist:
+            column_x = 0
+            for column in row:
+                if column == 1:
+                    draw.point((column_x + tetris_x, row_y + tetris_y), fill="white")
+                column_x = column_x + 1
+            row_y = row_y + 1
 
 Leonardo = Maler()
-Leonardo.draw(20, RandomBlock.RandomBlock())
+Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
 time.sleep(5)
