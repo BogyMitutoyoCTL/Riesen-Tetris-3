@@ -1,5 +1,3 @@
-import time
-import RandomBlock
 from luma.core.interface.serial import spi, noop
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, SINCLAIR_FONT
@@ -21,18 +19,20 @@ class Maler():
     def put_block(self, tetrisblock, draw):
 
 
-        tetris_x=29
-        tetris_y=2
+        tetris_x=26
+        tetris_y=0
         templist = tetrisblock.orientations[tetrisblock.orientation]
         row_y = 0
         for row in templist:
             column_x = 0
             for column in row:
                 if column == 1:
-                    draw.point((column_x + tetris_x, row_y + tetris_y), fill="white")
+                    gesamt_x = tetris_x + column_x * 2
+                    gesamt_y = tetris_y + row_y * 2
+                    draw.rectangle((gesamt_x, gesamt_y, gesamt_x + 1, gesamt_y + 1), fill="white")
                 column_x = column_x + 1
             row_y = row_y + 1
 
-Leonardo = Maler()
-Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
-time.sleep(5)
+#Leonardo = Maler()
+#Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
+#time.sleep(5)
