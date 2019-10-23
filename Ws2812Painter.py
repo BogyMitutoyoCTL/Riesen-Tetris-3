@@ -1,5 +1,3 @@
-import time
-
 from luma.led_matrix.device import neopixel
 from luma.core.render import canvas
 
@@ -43,10 +41,12 @@ class Ws2812Painter:
 
     def paint(self, playground):
         with canvas(self.device) as draw:
-            draw.point((0, 0), fill="blue")
-            draw.point((9, 0), fill="red")
-            draw.point((9, 19), fill="yellow")
-            draw.point((0, 19), fill="green")
-            draw.line((4, 0, 4, self.device.height), fill="green", width=4)
+            for row in range(0, 20):
+                for column in range(0, 10):
+
+                    draw.point((column, row), fill=playground.coordinate_system[row][column])
+
+
+
 
 

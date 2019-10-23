@@ -1,7 +1,7 @@
 class Tetrisblock:
     def __init__(self, alphalist, color):
         self.color = color
-        self.position = (3, 5)
+        self.position = (0, 0)
         self.orientations = alphalist
         self.orientation = 0
 
