@@ -43,7 +43,6 @@ class Ws2812Painter:
         with canvas(self.device) as draw:
             for row in range(0, 20):
                 for column in range(0, 10):
-
                     draw.point((column, row), fill=playground.coordinate_system[row][column])
 
 
