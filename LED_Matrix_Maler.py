@@ -1,11 +1,13 @@
+import time
 from luma.core.interface.serial import spi, noop
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, SINCLAIR_FONT
 from luma.core.render import canvas
 from luma.led_matrix.device import max7219
+import RandomBlock
 
 
-class Maler():
+class Painter():
 
     def draw(self, points, block):
         serial = spi(port=0, device=0, gpio=noop())
@@ -27,12 +29,13 @@ class Maler():
             column_x = 0
             for column in row:
                 if column == 1:
-                    gesamt_x = tetris_x + column_x * 2
-                    gesamt_y = tetris_y + row_y * 2
-                    draw.rectangle((gesamt_x, gesamt_y, gesamt_x + 1, gesamt_y + 1), fill="white")
+                    total_x = tetris_x + column_x * 2
+                    total_y = tetris_y + row_y * 2
+                    draw.rectangle((total_x, total_y, total_x + 1, total_y + 1), fill="white")
                 column_x = column_x + 1
             row_y = row_y + 1
 
-#Leonardo = Maler()
-#Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
-#time.sleep(5)
+if __name__ == "__main__":
+    Leonardo = Painter()
+    Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
+    time.sleep(5)
