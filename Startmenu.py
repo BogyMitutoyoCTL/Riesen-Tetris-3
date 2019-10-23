@@ -38,7 +38,37 @@ square = Tetrisblock.B
 square.position = (6, 17)
 playground.put_block(square)
 
+playground.set_pixel(0, 8, (255, 0, 0))
+playground.set_pixel(0, 9, (255, 0, 0))
+playground.set_pixel(0, 10, (255, 0, 0))
+playground.set_pixel(0, 11, (255, 0, 0))
+playground.set_pixel(1, 8, (255, 0, 0))
+playground.set_pixel(1, 10, (255, 0, 0))
+playground.set_pixel(2, 8, (255, 0, 0))
+playground.set_pixel(2, 9, (255, 0, 0))
+playground.set_pixel(2, 10, (255, 0, 0))
+
+playground.set_pixel(3, 8, (0, 0, 255))
+playground.set_pixel(3, 9, (0, 0, 255))
+playground.set_pixel(3, 10, (0, 0, 255))
+playground.set_pixel(3, 11, (0, 0, 255))
+playground.set_pixel(4, 11, (0, 0, 255))
+
+playground.set_pixel(5, 9, (0, 255, 0))
+playground.set_pixel(5, 10, (0, 255, 0))
+playground.set_pixel(5, 11, (0, 255, 0))
+playground.set_pixel(6, 8, (0, 255, 0))
+playground.set_pixel(6, 10, (0, 255, 0))
+playground.set_pixel(7, 9, (0, 255, 0))
+playground.set_pixel(7, 10, (0, 255, 0))
+playground.set_pixel(7, 11, (0, 255, 0))
+
+playground.set_pixel(7, 8, (255, 127, 39))
+playground.set_pixel(8, 9, (255, 127, 39))
+playground.set_pixel(8, 10, (255, 127, 39))
+playground.set_pixel(8, 11, (255, 127, 39))
+playground.set_pixel(9, 8, (255, 127, 39))
+
 painter = Ws2812Painter.Ws2812Painter()
 painter.paint(playground)
 time.sleep(100)
-
