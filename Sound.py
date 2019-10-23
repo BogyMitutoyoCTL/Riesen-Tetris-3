@@ -1,8 +1,6 @@
 import pygame
 
 pygame.init()
-
-
 class Sound:
 
     def __init__(self):
@@ -46,11 +44,3 @@ class Sound:
 
     def set_volume(self, volume):
         self.volume = volume
-
-#musiker = Sound()
-#musiker.set_volume(1.0)
-#musiker.game_over()
-#musiker.reached_limit()
-#musiker.reached_score()
-#pygame.time.wait(1000)
-#print(pygame.mixer.get_num_channels())
