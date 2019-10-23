@@ -47,13 +47,15 @@ while True:
         currentBlock = nextBlock
         y = 0
         nextBlock = objekt.get_random_block()
-    for _ in range(4):
+    for _ in range(10):
         buttons = controller.pressed()
         if "right" in buttons:
             x = x + 1
         if "left" in buttons:
             x = x - 1
-        clock.tick(4)
+        if "down" in buttons:
+            y = y + 1
+        clock.tick(10)
 
     currentBlock.position = x, y + 1
     playground.put_block(currentBlock)
