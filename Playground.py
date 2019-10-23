@@ -87,11 +87,28 @@ class Playground:
                 list_of_full_lines.append(h)
         return list_of_full_lines
 
+    def delete_line(self, line_number):
+        if line_number < self.height:
+            for i in reversed(range(1, line_number+1)):
+                self.coordinate_system[i] = self.coordinate_system[i-1]
+            for x in range(0, self.width):
+                self.coordinate_system[0][x] = BLACK
+
+    def print(self):
+        print("Start")
+        for h in range(0, self.height):
+                print(self.coordinate_system[h])
+        print("End")
+
 
 playground = Playground(width=10, height=20)
 for i in range(0, 10):
     playground.coordinate_system[5][i] = RED
+playground.coordinate_system[4][4] = RED
 print(playground.fullrow())
+playground.print()
+playground.delete_line(5)
+playground.print()
 # tetrisblock=Tetrisblock.B
 # tetrisblock.position = (6, 4)
 # playground.put_block(tetrisblock)
