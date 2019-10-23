@@ -45,7 +45,7 @@ class Playground:
             self.coordinate_system.append(rowlist)
 
     def put_block(self, tetrisblock: Tetrisblock):
-        c = tetrisblock.color
+        color = tetrisblock.color
         tetris_x, tetris_y = tetrisblock.position
 
         templist = tetrisblock.orientations[tetrisblock.orientation]
@@ -54,9 +54,12 @@ class Playground:
             column_x = 0
             for column in row:
                 if column == 1:
-                    self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = c
+                    self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = color
                 column_x = column_x + 1
             row_y = row_y + 1
+
+    def set_pixel(self, x, y, color):
+        self.coordinate_system[y][x] = color
 
     def remove_block(self, tetrisblock: Tetrisblock):
 
