@@ -2,11 +2,9 @@ import pygame
 
 class Controller:
     def __init__(self):
+        self.running = True
         pygame.joystick.init()
-        joystick_count = pygame.joystick.get_count()
-        for i in range(joystick_count):
-            joystick = pygame.joystick.Joystick(i)
-            joystick.init()
+        self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
 
@@ -28,7 +26,17 @@ class Controller:
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
-                done = True
+                self.running = False
+            elif event.type == pygame.KEYDOWN: 
+                print("KeyDown")
+                if event.key == pygame.K_DOWN:
+                    self.listofpressedbuttons += ["down"]
+                if event.key == pygame.K_UP:
+                    self.listofpressedbuttons += ["up"]
+                if event.key == pygame.K_RIGHT:
+                    self.listofpressedbuttons += ["right"]
+                if event.key == pygame.K_LEFT:
+                    self.listofpressedbuttons += ["left"]
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     self.listofpressedbuttons += ["A"]
@@ -89,5 +97,17 @@ class Controller:
 
 
 if __name__ == "__main__":
-    pygame.init()
-    done = False
+    background_colour = (255,255,255)
+    (width, height) = (300, 200)
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('Tutorial 1')
+    screen.fill(background_colour)
+    pygame.display.flip()
+    running = True
+    c = Controller()
+    while c.running:
+        c.get_joystick_buttons()
+        c.pressed()
+        c.released()
+        pygame.time.wait(5)
+    print("Ende")

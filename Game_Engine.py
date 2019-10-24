@@ -8,24 +8,25 @@ import Startmenu
 # import Points
 # import Music
 import Tetrisblock
-import control_feedback
+import Control_feedback
 
 # import Sound
 # import control_feedback
+pygame.init()
 clock = pygame.time.Clock()
 leonardo = LED_Matrix_Maler.Painter()
 tetrisblock = Tetrisblock.Tetrisblock
 playground = Playground.Playground(10, 20)
 
 objekt = RandomBlock.RandomBlock()
-controller = control_feedback.Controller()
+controller = Control_feedback.Controller()
 currentBlock = objekt.get_random_block()
 nextBlock = objekt.get_random_block()
 
 playground.put_block(currentBlock)
 
 painter = Ws2812Painter.Ws2812Painter()
-s = Startmenu(playground)
+s = Startmenu.Startmenu(playground)
 
 painter.paint(playground)
 time.sleep(3)
@@ -69,11 +70,57 @@ while True:
 
         if "Y" in buttons:
             currentBlock.turnleft()
+        if "A" in buttons:
+            #playground.coordinate_system[19][0] = (255, 0, 0)
+            #playground.coordinate_system[19][1] = (255, 0, 0)
+            #playground.coordinate_system[19][2] = (255, 0, 0)
+            #playground.coordinate_system[19][3] = (255, 0, 0)
+            #playground.coordinate_system[19][4] = (255, 0, 0)
+            #playground.coordinate_system[19][5] = (255, 0, 0)
+            #playground.coordinate_system[19][6] = (255, 0, 0)
+            #playground.coordinate_system[19][7] = (255, 0, 0)
+            #playground.coordinate_system[19][8] = (255, 0, 0)
+            #playground.coordinate_system[19][9] = (255, 0, 0)
+            #playground.coordinate_system[18][0] = (255, 0, 0)
+            #playground.coordinate_system[18][1] = (255, 0, 0)
+            #playground.coordinate_system[18][2] = (255, 0, 0)
+            #playground.coordinate_system[18][3] = (255, 0, 0)
+            #playground.coordinate_system[18][4] = (255, 0, 0)
+            #playground.coordinate_system[18][5] = (255, 0, 0)
+            #playground.coordinate_system[18][6] = (255, 0, 0)
+            #playground.coordinate_system[18][7] = (255, 0, 0)
+            #playground.coordinate_system[18][8] = (255, 0, 0)
+            #playground.coordinate_system[18][9] = (255, 0, 0)
+            #playground.coordinate_system[17][0] = (255, 0, 0)
+            #playground.coordinate_system[17][1] = (255, 0, 0)
+            #playground.coordinate_system[17][2] = (255, 0, 0)
+            #playground.coordinate_system[17][3] = (255, 0, 0)
+            #playground.coordinate_system[17][4] = (255, 0, 0)
+            #playground.coordinate_system[17][5] = (255, 0, 0)
+            #playground.coordinate_system[17][6] = (255, 0, 0)
+            #playground.coordinate_system[17][7] = (255, 0, 0)
+            #playground.coordinate_system[17][8] = (255, 0, 0)
+            #playground.coordinate_system[17][9] = (255, 0, 0)
+            #playground.coordinate_system[16][0] = (255, 0, 0)
+            #playground.coordinate_system[16][1] = (255, 0, 0)
+            #playground.coordinate_system[16][2] = (255, 0, 0)
+            #playground.coordinate_system[16][3] = (255, 0, 0)
+            #playground.coordinate_system[16][4] = (255, 0, 0)
+            #playground.coordinate_system[16][5] = (255, 0, 0)
+            #playground.coordinate_system[16][6] = (255, 0, 0)
+            #playground.coordinate_system[16][7] = (255, 0, 0)
+            #playground.coordinate_system[16][8] = (255, 0, 0)
+            #playground.coordinate_system[16][9] = (255, 0, 0)
+            pass
 
         playground.put_block(currentBlock)
         painter.paint(playground)
         playground.remove_block(currentBlock)
         clock.tick(8)
+        if playground.fullrow():
+            c = playground.fullrow()
+            print(c)
+            playground.delete_line(c)
     if y == 15:
         currentBlock = nextBlock
         nextBlock = objekt.get_random_block()
