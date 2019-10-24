@@ -99,7 +99,7 @@ class Playground:
                 list_of_columns = []
                 for x in range(0, self.width):
                     list_of_columns.append(BLACK)
-                self.coordinate_system[0]=list_of_columns
+                self.coordinate_system[0] = list_of_columns
 
     def print(self):
         print("Start")
@@ -109,13 +109,13 @@ class Playground:
 
     def collieds(self, tetrisblock):
         # Create a second shadow playgound
-        bordersize = 10
-        shadow = Playground(width=bordersize+10+bordersize, height=bordersize+20+bordersize)
+        bordersize = 7
+        shadow = Playground(width=bordersize + 10 + bordersize, height=bordersize + 20 + bordersize)
         shadow.fill(RED)
-        for y in range(bordersize, bordersize+20):
+        for y in range(bordersize - 4, bordersize + 20):
             for x in range(bordersize, bordersize + 10):
                 shadow.set_pixel(x, y, BLACK)
-
+        # copy original
         for original_y in range(0, 20):
             for original_x in range(0, 10):
                 original_color = self.coordinate_system[original_y][original_x]
@@ -160,19 +160,57 @@ class Playground:
 if __name__ == "__main__":
     playground = Playground(10, 20)
     playground.clear()
-    Tetrisblock.L.position = -1, 4
-    assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 0, 4
-    assert False == playground.collieds(Tetrisblock.L)  # left side
-    Tetrisblock.L.position = 5, -1
-    assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 5, 0
-    assert False == playground.collieds(Tetrisblock.L)  # top side
-    Tetrisblock.L.position = 10, 6
-    assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 8, 6
-    assert False == playground.collieds(Tetrisblock.L)  # right side
-    Tetrisblock.L.position = 4, 20
-    assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 4, 17
-    assert False == playground.collieds(Tetrisblock.L) #bottom side
+
+    L = Tetrisblock.L
+    L.position = (3, -3)
+    assert False == playground.collieds(L)
+    L.position = (0, -3)
+    assert False == playground.collieds(L)
+    L.position = (-1, -3)
+    assert True == playground.collieds(L)
+    L.position = (8, -3)
+    assert False == playground.collieds(L)
+    L.position = (9, -3)
+    assert True == playground.collieds(L)
+    L.position = (0, 17)
+    assert False == playground.collieds(L)
+    L.position = (0, 18)
+    assert True == playground.collieds(L)
+
+
+    I=Tetrisblock.I
+    I.position = (-2, -4)
+    assert True == playground.collieds(I)
+    I.position = (-1, -4)
+    assert False == playground.collieds(I)
+    I.position = (8, -4)
+    assert False == playground.collieds(I)
+    I.position = (9, -4)
+    assert True == playground.collieds(I)
+    I.position = (-2, 16)
+    assert True == playground.collieds(I)
+    I.position = (-1, 16)
+    assert False == playground.collieds(I)
+    I.position = (-1, 17)
+    assert True == playground.collieds(I)
+    I.position = (8, 17)
+    assert True == playground.collieds(I)
+    I.position = (8, 16)
+    assert False == playground.collieds(I)
+    I.position = (9, 16)
+    assert True == playground.collieds(I)
+
+    I.turnleft()
+    I.position = (3, -6)
+    assert True == playground.collieds(I)
+    I.position = (3, -5)
+    assert False == playground.collieds(I)
+    I.position = (3, 18)
+    assert False == playground.collieds(I)
+    I.position = (3, 19)
+    assert True == playground.collieds(I)
+
+    I.turnright()
+    I.turnright()
+    I.position = (3, -7)
+    assert True == playground.collieds(I)
