@@ -28,7 +28,6 @@ class Controller:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN: 
-                print("KeyDown")
                 if event.key == pygame.K_DOWN:
                     self.listofpressedbuttons += ["down"]
                 if event.key == pygame.K_UP:
