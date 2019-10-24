@@ -10,4 +10,5 @@ class RandomBlock:
     def get_random_block(self):
         R = randint(self.minimum, self.maximum)
         RndBlock = Tetrisblock.Blocklist[R]
+        RndBlock.position = 0,0
         return RndBlock
