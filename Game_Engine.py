@@ -27,7 +27,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     currentBlock = objekt.get_random_block()
     nextBlock = objekt.get_random_block()
     points = Points.Points()
-    Music.Music(1.0)
+    Music.Music(0.3)
     playground.put_block(currentBlock)
     while True:
 
