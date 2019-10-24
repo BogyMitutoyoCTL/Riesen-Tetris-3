@@ -1,5 +1,9 @@
 import pygame
 
+class FakeController:
+    def pressed(self):
+        return ["down"]
+
 class Controller:
     def __init__(self):
         self.running = True
