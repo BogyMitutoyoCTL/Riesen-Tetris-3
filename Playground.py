@@ -78,7 +78,6 @@ class Playground:
 
     def fullrow(self):
         list_of_full_lines = []
-        self.coordinate_system.index
         for h in range(0, self.height):
             is_full = True
             for w in range(0, self.width):
@@ -117,6 +116,7 @@ if __name__ == "__main__":
     playground.print()
     playground.delete_line(5)
     playground.print()
+
     # tetrisblock=Tetrisblock.B
     # tetrisblock.position = (6, 4)
     # playground.put_block(tetrisblock)
