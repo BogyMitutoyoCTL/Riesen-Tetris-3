@@ -15,9 +15,3 @@ class Points:
     def traversed_lines(self, y):
         if y > 0:
             self.points = self.points + y
-
-
-points = Points()
-points.lines(4)
-points.traversed_lines(8)
-print(points.points)

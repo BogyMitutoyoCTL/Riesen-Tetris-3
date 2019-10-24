@@ -17,7 +17,7 @@ class Painter:
     def draw(self, points, block):
         msg = str(points)
         with canvas(self.device) as draw:
-            text(draw, (0, 0), msg, fill="white", font=proportional(SINCLAIR_FONT))
+            text(draw, (0, 0), msg, fill="white", font=proportional(TINY_FONT))
             self.put_block(block, draw)
 
     def put_block(self, tetrisblock, draw):
