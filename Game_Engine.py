@@ -4,6 +4,7 @@ import Ws2812Painter
 import LED_Matrix_Maler
 import time
 import pygame
+import Startmenu
 # import Points
 # import Music
 import Tetrisblock
@@ -24,6 +25,12 @@ nextBlock = objekt.get_random_block()
 playground.put_block(currentBlock)
 
 painter = Ws2812Painter.Ws2812Painter()
+s = Startmenu(playground)
+
+painter.paint(playground)
+time.sleep(3)
+playground.clear()
+playground = Playground.Playground(10, 20)
 painter.paint(playground)
 # Wenn Start gedrückt wird muss ein Random Block von oben kommen
 while True:
@@ -57,14 +64,19 @@ while True:
         if "down" in buttons:
             y = y + 1
             print("down")
+        if "B" in buttons:
+            currentBlock.turnright()
+
+        if "Y" in buttons:
+            currentBlock.turnleft()
 
         playground.put_block(currentBlock)
         painter.paint(playground)
         playground.remove_block(currentBlock)
-        clock.tick()
-
+        clock.tick(8)
     if y == 15:
         currentBlock = nextBlock
         nextBlock = objekt.get_random_block()
+
     else:
         currentBlock.position = x, y + 1

@@ -1,4 +1,3 @@
-
 import Tetrisblock
 import Ws2812Painter
 
@@ -53,8 +52,9 @@ class Playground:
             column_x = 0
             for column in row:
                 if column == 1:
-                    self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = color
-
+                    if tetris_x + column_x >= 0 and tetris_y + row_y >= 0:
+                        if tetris_x + column_x < self.width and tetris_y + row_y < self.height:
+                            self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = color
                 column_x = column_x + 1
             row_y = row_y + 1
 
@@ -65,18 +65,19 @@ class Playground:
 
         tetris_x, tetris_y = tetrisblock.position
         templist = tetrisblock.orientations[tetrisblock.orientation]
-        row_x = 0
+        row_y = 0
         for row in templist:
             column_x = 0
             for column in row:
                 if column == 1:
-                    self.coordinate_system[row_x + tetris_y][column_x + tetris_x] = BLACK
+                    if tetris_x + column_x >= 0 and tetris_y + row_y >= 0:
+                        if tetris_x + column_x < self.width and tetris_y + row_y < self.height:
+                            self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = BLACK
                 column_x = column_x + 1
-            row_x = row_x + 1
+            row_y = row_y + 1
 
     def fullrow(self):
         list_of_full_lines = []
-        self.coordinate_system.index
         for h in range(0, self.height):
             is_full = True
             for w in range(0, self.width):
@@ -89,15 +90,15 @@ class Playground:
 
     def delete_line(self, line_number):
         if line_number < self.height:
-            for i in reversed(range(1, line_number+1)):
-                self.coordinate_system[i] = self.coordinate_system[i-1]
+            for i in reversed(range(1, line_number + 1)):
+                self.coordinate_system[i] = self.coordinate_system[i - 1]
             for x in range(0, self.width):
                 self.coordinate_system[0][x] = BLACK
 
     def print(self):
         print("Start")
         for h in range(0, self.height):
-                print(self.coordinate_system[h])
+            print(self.coordinate_system[h])
         print("End")
 
     def collieds(self, tetrisblock):
