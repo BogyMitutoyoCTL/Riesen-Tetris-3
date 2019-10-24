@@ -31,7 +31,7 @@ class Controller:
                 if event.key == pygame.K_DOWN:
                     self.listofpressedbuttons += ["down"]
                 if event.key == pygame.K_UP:
-                    self.listofpressedbuttons += ["up"]
+                    self.listofpressedbuttons += ["B"]
                 if event.key == pygame.K_RIGHT:
                     self.listofpressedbuttons += ["right"]
                 if event.key == pygame.K_LEFT:
