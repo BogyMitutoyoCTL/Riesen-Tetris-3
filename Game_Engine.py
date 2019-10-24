@@ -22,6 +22,7 @@ def before_game(playground, painter, controller):
             painter.paint(playground)
             break
 
+
 def play_game(playground, clock, painter, leonardo, controller, sound):
     objekt = RandomBlock.RandomBlock()
     currentBlock = objekt.get_random_block()
@@ -40,15 +41,16 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
                 currentBlock.position = future_block.position
                 currentBlock.orientation = future_block.orientation
             draw(currentBlock, painter, playground)
-            clock.tick(4)
+            clock.tick(points.points / 100 + 2)
 
         tryDown = FakeController()
-        future_block  = control_request(tryDown, currentBlock)
+        future_block = control_request(tryDown, currentBlock)
         if playground.collieds(future_block):
             currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound)
         else:
             currentBlock.position = future_block.position
             currentBlock.orientation = future_block.orientation
+
 
 def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound):
     handle_full_lines(playground, points, sound)
@@ -135,4 +137,3 @@ sound = Sound.Sound()
 
 before_game(playground, painter, controller)
 play_game(playground, clock, painter, leonardo, controller, sound)
-
