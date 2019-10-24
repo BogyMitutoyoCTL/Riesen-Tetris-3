@@ -79,4 +79,4 @@ if __name__ == "__main__":
     playground = Playground.Playground(10, 20)
     s = Startmenu(playground)
     painter.paint(playground)
-    time.sleep(5)
+    time.sleep(1000)
