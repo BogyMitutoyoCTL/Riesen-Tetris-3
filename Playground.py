@@ -34,11 +34,14 @@ class Playground:
         self.width = width
 
     def clear(self):
+        self.fill(BLACK)
+
+    def fill(self, color):
         self.coordinate_system = list()
         for row in range(self.height):
             rowlist = list()
             for column in range(self.width):
-                rowlist.append(BLACK)
+                rowlist.append(color)
 
             self.coordinate_system.append(rowlist)
 
@@ -105,6 +108,18 @@ class Playground:
         print("End")
 
     def collieds(self, tetrisblock):
+        # Create a second shadow playgound
+        bordersize = 10
+        shadow = Playground(width=bordersize+10+bordersize, height=bordersize+20+bordersize)
+        shadow.fill(RED)
+        for y in range(bordersize, bordersize+20):
+            for x in range(bordersize, bordersize + 10):
+                shadow.set_pixel(x, y, BLACK)
+
+        for original_y in range(0, 20):
+            for original_x in range(0, 10):
+                original_color = self.coordinate_system[original_y][original_x]
+                shadow.set_pixel(original_x + bordersize, original_y + bordersize, original_color)
 
         drei_mal_drei_feld = tetrisblock.orientations[tetrisblock.orientation]
         feld_linker_rand, feld_oberer_rand = tetrisblock.position
@@ -115,9 +130,10 @@ class Playground:
         for zeile_aus_feld in drei_mal_drei_feld:
             column_number_of_zeile = 0
             for spalte_aus_feld_null_oder_eins in zeile_aus_feld:
-                position_in_coordinate_system_x = feld_linker_rand + column_number_of_zeile
-                position_in_coordinate_system_y = feld_oberer_rand + row_number_of_tetrisblock
-                color_at_that_position = self.coordinate_system[position_in_coordinate_system_y][position_in_coordinate_system_x]
+                position_in_shadow_system_x = feld_linker_rand + column_number_of_zeile + bordersize
+                position_in_shadow_system_y = feld_oberer_rand + row_number_of_tetrisblock + bordersize
+                color_at_that_position = shadow.coordinate_system[position_in_shadow_system_y][
+                    position_in_shadow_system_x]
                 if spalte_aus_feld_null_oder_eins == 0:
                     # Jede Farbe multipliziert mit 0 ergibt schwarz
                     resulting_colors += [BLACK]
@@ -132,18 +148,31 @@ class Playground:
             row_number_of_tetrisblock += 1
 
         # Jetzt haben wir 9 Farben in resulting_colors
-        es_gab_eine_kollision = False # Annahme
+        es_gab_eine_kollision = False  # Annahme
         for farbe in resulting_colors:
             if farbe == BLACK:
                 pass
-            else :
+            else:
                 es_gab_eine_kollision = es_gab_eine_kollision or True
         return es_gab_eine_kollision
 
+
 if __name__ == "__main__":
-    playground = Playground(width=10, height=20)
-    for i in range(0, 10):
-        for o in range(0,20):
-            playground.coordinate_system[o][i] = BLACK
-    r=playground.collieds(Tetrisblock.L)
-    print(r)
+    playground = Playground(10, 20)
+    playground.clear()
+    Tetrisblock.L.position = -1, 4
+    assert True == playground.collieds(Tetrisblock.L)
+    Tetrisblock.L.position = 0, 4
+    assert False == playground.collieds(Tetrisblock.L)  # left side
+    Tetrisblock.L.position = 5, -1
+    assert True == playground.collieds(Tetrisblock.L)
+    Tetrisblock.L.position = 5, 0
+    assert False == playground.collieds(Tetrisblock.L)  # top side
+    Tetrisblock.L.position = 10, 6
+    assert True == playground.collieds(Tetrisblock.L)
+    Tetrisblock.L.position = 8, 6
+    assert False == playground.collieds(Tetrisblock.L)  # right side
+    Tetrisblock.L.position = 4, 20
+    assert True == playground.collieds(Tetrisblock.L)
+    Tetrisblock.L.position = 4, 17
+    assert False == playground.collieds(Tetrisblock.L) #bottom side
