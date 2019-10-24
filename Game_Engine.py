@@ -77,9 +77,9 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
         # wenn playground.collieds(currentBlock) dann gameover
         if playground.collieds(currentBlock):
             if currentBlock.position[1] < 0:
-                effect.game_over()
+                sound.game_over()
             else:
-                effect.reached_limit()
+                sound.reached_limit()
 
         if y == 15:
             currentBlock = nextBlock
@@ -90,6 +90,13 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
 
 
 pygame.init()
+background_colour = (255, 255, 255)
+(width, height) = (300, 200)
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption('Tutorial 1')
+screen.fill(background_colour)
+pygame.display.flip()
+
 clock = pygame.time.Clock()
 leonardo = LED_Matrix_Maler.Painter()
 tetrisblock = Tetrisblock.Tetrisblock
@@ -97,6 +104,7 @@ playground = Playground.Playground(10, 20)
 controller = Control_feedback.Controller()
 painter = Ws2812Painter.Ws2812Painter()
 sound = Sound.Sound()
+
 before_game(playground, painter, controller)
 play_game(playground, clock, painter, leonardo, controller, sound)
-effect = Sound()
+
