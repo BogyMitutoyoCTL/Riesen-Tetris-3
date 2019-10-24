@@ -100,7 +100,7 @@ class Playground:
                 print(self.coordinate_system[h])
         print("End")
 
-    def collieds(self, tetrisblock, Tetrisblock, color):
+    def collieds(self, tetrisblock):
 
         drei_mal_drei_feld = tetrisblock.orientations[tetrisblock.orientation]
         feld_linker_rand, feld_oberer_rand = tetrisblock.position
@@ -127,29 +127,19 @@ class Playground:
                 column_number_of_zeile += 1
             row_number_of_tetrisblock += 1
 
-        # Jetzt haben wir 9 Farben
-
+        # Jetzt haben wir 9 Farben in resulting_colors
+        es_gab_eine_kollision = False # Annahme
+        for farbe in resulting_colors:
+            if farbe == BLACK:
+                pass
+            else :
+                es_gab_eine_kollision = es_gab_eine_kollision or True
+        return es_gab_eine_kollision
 
 if __name__ == "__main__":
     playground = Playground(width=10, height=20)
     for i in range(0, 10):
-        playground.coordinate_system[5][i] = RED
-    playground.coordinate_system[4][4] = RED
-    print(playground.fullrow())
-    playground.print()
-    playground.delete_line(5)
-    playground.print()
-    # tetrisblock=Tetrisblock.B
-    # tetrisblock.position = (6, 4)
-    # playground.put_block(tetrisblock)
-    # tetrisblock=Tetrisblock.Z
-
-    # playground.put_block(tetrisblock)
-    # ws2812painter= Ws2812Painter.Ws2812Painter()
-
-    # ws2812painter.paint(playground)
-    # time.sleep(3)
-    # playground.remove_block(tetrisblock)
-    # ws2812painter.paint(playground)
-
-    # time.sleep(100)
+        for o in range(0,20):
+            playground.coordinate_system[o][i] = BLACK
+    r=playground.collieds(Tetrisblock.L)
+    print(r)
