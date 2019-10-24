@@ -7,6 +7,7 @@ import Ws2812Painter
 
 playground = Playground.Playground(width=10, height=20)
 
+
 square = Tetrisblock.B
 square.position = (1, 4)
 playground.put_block(square)
@@ -64,11 +65,11 @@ playground.set_pixel(7, 9, (0, 255, 0))
 playground.set_pixel(7, 10, (0, 255, 0))
 playground.set_pixel(7, 11, (0, 255, 0))
 
-playground.set_pixel(7, 8, (255, 127, 39))
-playground.set_pixel(8, 9, (255, 127, 39))
-playground.set_pixel(8, 10, (255, 127, 39))
-playground.set_pixel(8, 11, (255, 127, 39))
-playground.set_pixel(9, 8, (255, 127, 39))
+playground.set_pixel(7, 8, (255, 255, 0))
+playground.set_pixel(8, 9, (255, 255, 0))
+playground.set_pixel(8, 10, (255, 255, 0))
+playground.set_pixel(8, 11, (255, 255, 0))
+playground.set_pixel(9, 8, (255, 255, 0))
 
 painter = Ws2812Painter.Ws2812Painter()
 painter.paint(playground)
