@@ -1,17 +1,12 @@
 import pygame
 
-pygame.init()
-
-done = False
-
-pygame.joystick.init()
-
-joystick = pygame.joystick.Joystick(0)
-joystick.init()
-
-
 class Controller:
     def __init__(self):
+        pygame.joystick.init()
+        joystick_count = pygame.joystick.get_count()
+        for i in range(joystick_count):
+            joystick = pygame.joystick.Joystick(i)
+            joystick.init()
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
 
@@ -91,3 +86,8 @@ class Controller:
                         self.listofpressedbuttons +=["down"]
                     if event.value < -0.4:
                         self.listofpressedbuttons +=["up"]
+
+
+if __name__ == "__main__":
+    pygame.init()
+    done = False
