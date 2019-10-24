@@ -64,14 +64,19 @@ while True:
         if "down" in buttons:
             y = y + 1
             print("down")
+        if "B" in buttons:
+            currentBlock.turnright()
+
+        if "Y" in buttons:
+            currentBlock.turnleft()
 
         playground.put_block(currentBlock)
         painter.paint(playground)
         playground.remove_block(currentBlock)
-        clock.tick()
-
+        clock.tick(8)
     if y == 15:
         currentBlock = nextBlock
         nextBlock = objekt.get_random_block()
+
     else:
         currentBlock.position = x, y + 1

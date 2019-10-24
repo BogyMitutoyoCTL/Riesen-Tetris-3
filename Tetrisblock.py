@@ -23,7 +23,7 @@ class Tetrisblock:
 
     def turnleft(self):
         self.orientation -= 1
-        if self.orientation == 0:
+        if self.orientation == -1:
             self.orientation = 3
 
 
