@@ -31,61 +31,85 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     music = Music.Music
     playground.put_block(currentBlock)
     while True:
-
         leonardo.draw(str(points.points), nextBlock)
 
-        x, y = currentBlock.position
-
         for _ in range(4):
-            buttons = controller.pressed()
-
-            if "right" in buttons:
-                x = x + 1
-                print("right")
-
-            if "left" in buttons:
-                x = x - 1
-                print("left")
-
-            if "down" in buttons:
-                y = y + 1
-                print("down")
-            if "B" in buttons:
-                currentBlock.turnright()
-
-            if "Y" in buttons:
-                currentBlock.turnleft()
-
-            playground.put_block(currentBlock)
-            painter.paint(playground)
-            playground.remove_block(currentBlock)
-            clock.tick(4)
-            c = playground.fullrow()
-            if len(c) > 0:
-                playground.delete_line(c)
-                points.lines(len(c))
-                if len(c) == 1:
-                    sound.complete_line1()
-                if len(c) == 2:
-                    sound.complete_line2()
-                if len(c) == 3:
-                    sound.complete_line3()
-                if len(c) == 4:
-                    sound.complete_line4()
-
-        # wenn playground.collieds(currentBlock) dann gameover
-        if playground.collieds(currentBlock):
-            if currentBlock.position[1] < 0:
-                sound.game_over()
+            future_x, future_y, future_orient = control_request(controller, currentBlock)
+            future_block = currentBlock.clone()
+            future_block.position = future_x, future_y
+            future_block.orientation = future_orient
+            if playground.collieds(future_block):
+                currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound)
             else:
-                sound.reached_limit()
+                currentBlock.position = future_x, future_y
+                currentBlock.orientation = future_orient
+            draw(currentBlock, painter, playground)
+            clock.tick(4)
 
-        if y == 15:
+
+        currentBlock.position = currentBlock.position[0], currentBlock.position[1] + 1
+
+def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound):
+    if playground.collieds(currentBlock):
+        handle_full_lines(playground, points, sound)
+        if currentBlock.position[1] < 0:
+            sound.game_over()
+        if currentBlock.position[1] > 0:
+            sound.warning()
+            playground.put_block(currentBlock)
+            currentBlock = nextBlock
+            nextBlock = objekt.get_random_block()
+        else:
+            sound.reached_limit()
             currentBlock = nextBlock
             nextBlock = objekt.get_random_block()
 
-        else:
-            currentBlock.position = x, y + 1
+    return currentBlock, nextBlock
+
+
+def draw(currentBlock, painter, playground):
+    playground.put_block(currentBlock)
+    painter.paint(playground)
+    playground.remove_block(currentBlock)
+
+
+def handle_full_lines(playground, points, sound):
+    c = playground.fullrow()
+    if len(c) > 0:
+        playground.delete_line(c)
+        points.lines(len(c))
+        if len(c) == 1:
+            sound.complete_line1()
+        if len(c) == 2:
+            sound.complete_line2()
+        if len(c) == 3:
+            sound.complete_line3()
+        if len(c) == 4:
+            sound.complete_line4()
+
+
+def control_request(controller, currentBlock):
+    buttons = controller.pressed()
+    future_orientation = currentBlock.orientation
+    future_x, future_y = currentBlock.position
+    if "right" in buttons:
+        future_x = future_x + 1
+        print("right")
+    if "left" in buttons:
+        future_x = future_x - 1
+        print("left")
+    if "down" in buttons:
+        future_y = future_y + 1
+        print("down")
+    if "B" in buttons:
+        currentBlock.turnright()
+        future_orientation = currentBlock.orientation
+        currentBlock.turnleft()
+    if "Y" in buttons:
+        currentBlock.turnleft()
+        future_orientation = currentBlock.orientation
+        currentBlock.turnright()
+    return future_x, future_y, future_orientation
 
 
 pygame.init()

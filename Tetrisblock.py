@@ -27,6 +27,14 @@ class Tetrisblock:
         if self.orientation == -1:
             self.orientation = 3
 
+    def clone(self):
+        temp = Tetrisblock(None, None)
+        temp.color = self.color
+        temp.position = self.position
+        temp.orientations = self.orientations
+        temp.orientation = self.orientation
+        return temp
+
 
 L = Tetrisblock(
     [[[1, 1, 0, ],
