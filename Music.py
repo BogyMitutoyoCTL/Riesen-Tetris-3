@@ -3,7 +3,7 @@ import pygame
 
 
 class Music:
-    def __init__(self, volume, time):
+    def __init__(self, volume):
         self.start = 0
         self.repeat = 0
         self.volume = volume
