@@ -10,8 +10,10 @@ class Startmenu:
     def __init__(self, playground):
         self.playground = playground
 
-        square = Tetrisblock.B
-        square.position = (1, 4)
+        square = Tetrisblock.T
+        square.position = (1, 3)
+        square.turnleft()
+        square.turnleft()
         self.playground.put_block(square)
 
         square = Tetrisblock.Zr
@@ -34,12 +36,12 @@ class Startmenu:
         square.turnleft()
         self.playground.put_block(square)
 
-        square = Tetrisblock.T
+        square = Tetrisblock.B
         square.position = (6, 14)
         self.playground.put_block(square)
 
-        square = Tetrisblock.B
-        square.position = (6, 17)
+        square = Tetrisblock.Z
+        square.position = (5, 16)
         self.playground.put_block(square)
 
         self.playground.set_pixel(0, 8, (255, 0, 0))
@@ -79,4 +81,4 @@ if __name__ == "__main__":
     playground = Playground.Playground(10, 20)
     s = Startmenu(playground)
     painter.paint(playground)
-    time.sleep(1000)
+    time.sleep(100000)
