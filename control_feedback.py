@@ -2,7 +2,11 @@ import pygame
 
 class Controller:
     def __init__(self):
-        pygame.joystick.init()
+        pygame.init()
+
+        joystick = pygame.joystick.Joystick(0)
+        joystick.init()
+
         self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
@@ -86,7 +90,6 @@ class Controller:
 
 
 if __name__ == "__main__":
-    pygame.init()
     c = Controller()
     c.get_joystick_buttons()
     print(c.pressed())
