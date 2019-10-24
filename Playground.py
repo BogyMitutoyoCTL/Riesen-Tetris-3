@@ -88,12 +88,15 @@ class Playground:
                 list_of_full_lines.append(h)
         return list_of_full_lines
 
-    def delete_line(self, line_number):
-        if line_number < self.height:
-            for i in reversed(range(1, line_number + 1)):
-                self.coordinate_system[i] = self.coordinate_system[i - 1]
-            for x in range(0, self.width):
-                self.coordinate_system[0][x] = BLACK
+    def delete_line(self, line_numbers):
+        for line_number in line_numbers:
+            if line_number < self.height:
+                for i in reversed(range(1, line_number + 1)):
+                    self.coordinate_system[i] = self.coordinate_system[i - 1]
+                list_of_columns = []
+                for x in range(0, self.width):
+                    list_of_columns.append(BLACK)
+                self.coordinate_system[0]=list_of_columns
 
     def print(self):
         print("Start")
