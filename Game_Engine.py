@@ -40,24 +40,31 @@ while True:
     # kann er nicht mehr aufs Spielfeld, endet das Spiel. Wenn nicht, geht das Spiel weiter
     # Alles wiederholt sich
     leonardo.draw(20, nextBlock)
-    playground.remove_block(currentBlock)
+
     x, y = currentBlock.position
+
+    for _ in range(4):
+        buttons = controller.pressed()
+
+        if "right" in buttons:
+            x = x + 1
+            print("right")
+
+        if "left" in buttons:
+            x = x - 1
+            print("left")
+
+        if "down" in buttons:
+            y = y + 1
+            print("down")
+
+        playground.put_block(currentBlock)
+        painter.paint(playground)
+        playground.remove_block(currentBlock)
+        clock.tick()
 
     if y == 15:
         currentBlock = nextBlock
-        y = 0
         nextBlock = objekt.get_random_block()
-    for _ in range(10):
-        buttons = controller.pressed()
-        if "right" in buttons:
-            x = x + 1
-        if "left" in buttons:
-            x = x - 1
-        if "down" in buttons:
-            y = y + 1
-        clock.tick(10)
-
-    currentBlock.position = x, y + 1
-    playground.put_block(currentBlock)
-
-    painter.paint(playground)
+    else:
+        currentBlock.position = x, y + 1

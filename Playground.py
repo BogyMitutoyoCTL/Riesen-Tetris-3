@@ -100,25 +100,26 @@ class Playground:
         print("End")
 
 
-playground = Playground(width=10, height=20)
-for i in range(0, 10):
-    playground.coordinate_system[5][i] = RED
-playground.coordinate_system[4][4] = RED
-print(playground.fullrow())
-playground.print()
-playground.delete_line(5)
-playground.print()
-# tetrisblock=Tetrisblock.B
-# tetrisblock.position = (6, 4)
-# playground.put_block(tetrisblock)
-# tetrisblock=Tetrisblock.Z
+if __name__ == "__main__":
+    playground = Playground(width=10, height=20)
+    for i in range(0, 10):
+        playground.coordinate_system[5][i] = RED
+    playground.coordinate_system[4][4] = RED
+    print(playground.fullrow())
+    playground.print()
+    playground.delete_line(5)
+    playground.print()
+    # tetrisblock=Tetrisblock.B
+    # tetrisblock.position = (6, 4)
+    # playground.put_block(tetrisblock)
+    # tetrisblock=Tetrisblock.Z
 
-# playground.put_block(tetrisblock)
-# ws2812painter= Ws2812Painter.Ws2812Painter()
+    # playground.put_block(tetrisblock)
+    # ws2812painter= Ws2812Painter.Ws2812Painter()
 
-# ws2812painter.paint(playground)
-# time.sleep(3)
-# playground.remove_block(tetrisblock)
-# ws2812painter.paint(playground)
+    # ws2812painter.paint(playground)
+    # time.sleep(3)
+    # playground.remove_block(tetrisblock)
+    # ws2812painter.paint(playground)
 
-# time.sleep(100)
+    # time.sleep(100)
