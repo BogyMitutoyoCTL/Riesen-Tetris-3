@@ -8,24 +8,25 @@ import Startmenu
 # import Points
 # import Music
 import Tetrisblock
-import control_feedback
+import Control_feedback
 
 # import Sound
 # import control_feedback
+pygame.init()
 clock = pygame.time.Clock()
 leonardo = LED_Matrix_Maler.Painter()
 tetrisblock = Tetrisblock.Tetrisblock
 playground = Playground.Playground(10, 20)
 
 objekt = RandomBlock.RandomBlock()
-controller = control_feedback.Controller()
+controller = Control_feedback.Controller()
 currentBlock = objekt.get_random_block()
 nextBlock = objekt.get_random_block()
 
 playground.put_block(currentBlock)
 
 painter = Ws2812Painter.Ws2812Painter()
-s = Startmenu(playground)
+s = Startmenu.Startmenu(playground)
 
 painter.paint(playground)
 time.sleep(3)
@@ -110,7 +111,7 @@ while True:
             #playground.coordinate_system[16][7] = (255, 0, 0)
             #playground.coordinate_system[16][8] = (255, 0, 0)
             #playground.coordinate_system[16][9] = (255, 0, 0)
-
+            pass
 
         playground.put_block(currentBlock)
         painter.paint(playground)
