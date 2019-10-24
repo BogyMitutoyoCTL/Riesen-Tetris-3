@@ -167,9 +167,9 @@ if __name__ == "__main__":
     assert False == playground.collieds(Tetrisblock.L)  # top side
     Tetrisblock.L.position = 10, 6
     assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 9, 6
+    Tetrisblock.L.position = 8, 6
     assert False == playground.collieds(Tetrisblock.L)  # right side
     Tetrisblock.L.position = 4, 20
     assert True == playground.collieds(Tetrisblock.L)
-    Tetrisblock.L.position = 4, 19
+    Tetrisblock.L.position = 4, 17
     assert False == playground.collieds(Tetrisblock.L) #bottom side
