@@ -2,7 +2,6 @@ import Playground
 import RandomBlock
 import Ws2812Painter
 import LED_Matrix_Maler
-import time
 import pygame
 import Startmenu
 import Points
@@ -28,7 +27,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     currentBlock = objekt.get_random_block()
     nextBlock = objekt.get_random_block()
     points = Points.Points()
-    music = Music.Music
+    Music.Music(0.3)
     playground.put_block(currentBlock)
     while True:
         leonardo.draw(str(points.points), nextBlock)

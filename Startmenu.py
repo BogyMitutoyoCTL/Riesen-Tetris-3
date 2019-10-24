@@ -37,7 +37,7 @@ class Startmenu:
         self.playground.put_block(square)
 
         square = Tetrisblock.B
-        square.position = (6, 14)
+        square.position = (7, 14)
         self.playground.put_block(square)
 
         square = Tetrisblock.Z
