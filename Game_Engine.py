@@ -6,13 +6,11 @@ import time
 import pygame
 import Startmenu
 import Points
-# import Music
+import Music
 import Tetrisblock
 import Control_feedback
 import Sound
 
-# import Sound
-# import control_feedback
 
 
 def before_game(playground, painter, controller):
@@ -30,6 +28,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     currentBlock = objekt.get_random_block()
     nextBlock = objekt.get_random_block()
     points = Points.Points()
+    music = Music.Music
     playground.put_block(currentBlock)
     while True:
 

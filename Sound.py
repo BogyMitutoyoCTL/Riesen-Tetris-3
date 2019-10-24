@@ -1,7 +1,6 @@
 
 import pygame
 
-pygame.init()
 class Sound:
     def __init__(self):
         self.volume = 1.0
