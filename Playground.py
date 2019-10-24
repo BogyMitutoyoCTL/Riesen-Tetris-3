@@ -54,6 +54,7 @@ class Playground:
             for column in row:
                 if column == 1:
                     self.coordinate_system[row_y + tetris_y][column_x + tetris_x] = color
+
                 column_x = column_x + 1
             row_y = row_y + 1
 
@@ -98,6 +99,35 @@ class Playground:
         for h in range(0, self.height):
                 print(self.coordinate_system[h])
         print("End")
+
+    def collieds(self, tetrisblock, Tetrisblock, color):
+
+        drei_mal_drei_feld = tetrisblock.orientations[tetrisblock.orientation]
+        feld_linker_rand, feld_oberer_rand = tetrisblock.position
+
+        # Ermitteln der 9 Ergebnisfarben nach der Multiplikation
+        resulting_colors = []
+        row_number_of_tetrisblock = 0
+        for zeile_aus_feld in drei_mal_drei_feld:
+            column_number_of_zeile = 0
+            for spalte_aus_feld_null_oder_eins in zeile_aus_feld:
+                position_in_coordinate_system_x = feld_linker_rand + column_number_of_zeile
+                position_in_coordinate_system_y = feld_oberer_rand + row_number_of_tetrisblock
+                color_at_that_position = self.coordinate_system[position_in_coordinate_system_y][position_in_coordinate_system_x]
+                if spalte_aus_feld_null_oder_eins == 0:
+                    # Jede Farbe multipliziert mit 0 ergibt schwarz
+                    resulting_colors += [BLACK]
+                else:
+                    if color_at_that_position == BLACK:
+                        # Schwarz multipliziert mit jeder Zahl ergibt schwarz
+                        resulting_colors += [BLACK]
+                    else:
+                        # Nicht-Schwarz multipliziert mit 1 ergibt die gleiche Farbe wieder
+                        resulting_colors += color_at_that_position
+                column_number_of_zeile += 1
+            row_number_of_tetrisblock += 1
+
+        # Jetzt haben wir 9 Farben
 
 
 if __name__ == "__main__":
