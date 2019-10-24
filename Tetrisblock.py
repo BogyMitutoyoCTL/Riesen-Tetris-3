@@ -1,3 +1,4 @@
+
 class Tetrisblock:
     def __init__(self, alphalist, color):
         self.color = color

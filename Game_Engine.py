@@ -9,14 +9,19 @@ import Startmenu
 # import Music
 import Tetrisblock
 import Control_feedback
+import Sound
 
-# import Sound
-# import control_feedback
 pygame.init()
 clock = pygame.time.Clock()
 leonardo = LED_Matrix_Maler.Painter()
 tetrisblock = Tetrisblock.Tetrisblock
 playground = Playground.Playground(10, 20)
+effect = Sound()
+painter = Ws2812Painter.Ws2812Painter()
+s = Startmenu.Startmenu(playground)
+
+painter.paint(playground)
+time.sleep(3)
 
 objekt = RandomBlock.RandomBlock()
 controller = Control_feedback.Controller()
@@ -25,11 +30,6 @@ nextBlock = objekt.get_random_block()
 
 playground.put_block(currentBlock)
 
-painter = Ws2812Painter.Ws2812Painter()
-s = Startmenu.Startmenu(playground)
-
-painter.paint(playground)
-time.sleep(3)
 playground.clear()
 playground = Playground.Playground(10, 20)
 painter.paint(playground)
@@ -112,18 +112,26 @@ while True:
             #playground.coordinate_system[16][8] = (255, 0, 0)
             #playground.coordinate_system[16][9] = (255, 0, 0)
             pass
+        # wenn playground.collieds(currentBlock) dann gameover
+        if playground.collieds(currentBlock):
+            if currentBlock.position[1] < 0:
+                effect.game_over()
+            else:
+                effect.reached_limit()
 
-        playground.put_block(currentBlock)
-        painter.paint(playground)
-        playground.remove_block(currentBlock)
-        clock.tick(8)
-        if playground.fullrow():
-            c = playground.fullrow()
-            print(c)
-            playground.delete_line(c)
-    if y == 15:
-        currentBlock = nextBlock
-        nextBlock = objekt.get_random_block()
+            #collision game over
 
-    else:
-        currentBlock.position = x, y + 1
+        else:
+            playground.put_block(currentBlock)
+            painter.paint(playground)
+            playground.remove_block(currentBlock)
+            clock.tick(8)
+            if playground.fullrow():
+                c = playground.fullrow()
+                print.rint(c)
+                playground.delete_line(c)
+                if y == 15:
+                   currentBlock = nextBlock
+                   nextBlock = objekt.get_random_block()
+                else:
+                   currentBlock.position = x, y + 1

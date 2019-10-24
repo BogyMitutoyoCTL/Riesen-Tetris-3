@@ -1,3 +1,4 @@
+
 import time
 from luma.core.interface.serial import spi, noop
 from luma.core.legacy import text
@@ -44,5 +45,5 @@ if __name__ == "__main__":
     Leonardo = Painter()
     Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
     time.sleep(5)
-    Leonardo.write_text("Options")
+    Leonardo.write_text("*Options")
     time.sleep(20)
