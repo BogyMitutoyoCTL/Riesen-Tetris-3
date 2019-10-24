@@ -30,6 +30,15 @@ class Controller:
             #print(event)
             if event.type == pygame.QUIT:
                 done = True
+            elif event.type == pygame.KEYDOWN: 
+                if event.key == pygame.K_DOWN:
+                    self.listofpressedbuttons += ["down"]
+                if event.key == pygame.K_UP:
+                    self.listofpressedbuttons += ["up"]
+                if event.key == pygame.K_RIGHT:
+                    self.listofpressedbuttons += ["right"]
+                if event.key == pygame.K_LEFT:
+                    self.listofpressedbuttons += ["left"]
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     self.listofpressedbuttons += ["A"]
@@ -91,7 +100,9 @@ class Controller:
 
 if __name__ == "__main__":
     c = Controller()
-    c.get_joystick_buttons()
-    print(c.pressed())
-    print(c.released())
+    while True:
+        c.get_joystick_buttons()
+        print(c.pressed())
+        print(c.released())
+        pygame.time.wait(50)
     done = False
