@@ -23,6 +23,18 @@ def start_screen(playground, painter, controller):
             painter.paint(playground)
             break
 
+def game_over_screen(playground, leonardo, points, sounds, controller):
+    h = Highscore("highscore.txt", leonardo, sounds)
+    h.handle_highscore("name", points.points)
+
+    while True:
+        buttons = controller.pressed()
+        if "Start" in buttons:
+            playground.clear()
+            painter.paint(playground)
+            break
+
+
 
 def play_game(playground, clock, painter, leonardo, controller, sound):
     objekt = RandomBlock.RandomBlock()
@@ -62,11 +74,9 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
             current_block.orientation = future_block.orientation
             handle_full_lines(playground, points, sounds)
 
-    h = Highscore()
-    h.load_points("etr")
-    h.save_points("etr", "noname", points.points)
     walkman.stop()
 
+    game_over_screen(playground, leonardo, points, sounds, controller)
 
 def handle_collision(currentBlock, playground, points, sound, moved_down):
     handle_full_lines(playground, points, sound)
