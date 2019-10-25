@@ -1,3 +1,5 @@
+from random import randint
+
 
 class Tetrisblock:
     def __init__(self, alphalist, color):
@@ -42,6 +44,9 @@ class Tetrisblock:
         temp.orientations = self.orientations
         temp.orientation = self.orientation
         return temp
+
+    def random_orientation(self):
+        self.orientation = randint(0, 3)
 
     def moveright(self):
         self.position = self.x + 1, self.y
