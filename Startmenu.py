@@ -1,4 +1,3 @@
-
 import time
 
 import Playground
@@ -11,39 +10,41 @@ from LED_Matrix_Maler import Painter
 class Startmenu:
     def __init__(self, playground):
         self.playground = playground
+        self.playground.clear()
 
         square = Tetrisblock.T
+        square.orientation = 2
         square.position = (1, 3)
-        square.turnleft()
-        square.turnleft()
         self.playground.put_block(square)
 
         square = Tetrisblock.Zr
+        square.orientation = 0
         square.position = (4, 1)
         self.playground.put_block(square)
 
         square = Tetrisblock.L
+        square.orientation = 3
         square.position = (6, 5)
-        square.turnleft()
         self.playground.put_block(square)
 
         square = Tetrisblock.I
         square.position = (1, 12)
-        square.turnleft()
+        square.orientation = 3
         self.playground.put_block(square)
 
         square = Tetrisblock.Lr
         square.position = (1, 15)
-        square.turnleft()
-        square.turnleft()
+        square.orientation = 2
         self.playground.put_block(square)
 
         square = Tetrisblock.B
         square.position = (7, 14)
+        square.orientation = 0
         self.playground.put_block(square)
 
         square = Tetrisblock.Z
         square.position = (5, 16)
+        square.orientation = 0
         self.playground.put_block(square)
 
         self.playground.set_pixel(0, 8, (255, 0, 0))
@@ -79,6 +80,7 @@ class Startmenu:
 
         Leonardo = Painter()
         Leonardo.write_text("* START")
+
 
 if __name__ == "__main__":
     painter = Ws2812Painter.Ws2812Painter()
