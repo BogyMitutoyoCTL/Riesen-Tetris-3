@@ -2,5 +2,5 @@
 cd /home/pi/Riesen-Tetris-3/
 echo Tetris Bash Script
 pwd
-python3 MAIN.py
+python3 Game_Engine.py
 
