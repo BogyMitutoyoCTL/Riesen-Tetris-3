@@ -59,7 +59,7 @@ def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound)
     else:
         playground.put_block(currentBlock)
 
-        if currentBlock.position[1] < 11:
+        if currentBlock.position[1] < 5:
             sound.warning()
         else:
             sound.reached_limit()
