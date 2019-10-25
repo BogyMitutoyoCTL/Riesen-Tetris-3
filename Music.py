@@ -9,4 +9,4 @@ class Music:
         self.volume = volume
         pygame.mixer.music.load('./sounds/Tetris_theme.ogg')
         pygame.mixer.music.set_volume(volume)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
