@@ -8,6 +8,7 @@ class Controller:
             joystick.init()
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
+        self.remember_keyboard = []
 
     def pressed(self):
         self.get_joystick_buttons()
@@ -21,6 +22,10 @@ class Controller:
         self.listofreleasedbuttons = []
         return temp
 
+   # def joystick_simple_press(self):
+        # wenn Taste gedrückt gehalten wird
+            # solange es "True" ist schleife den output --> einen dauer output
+
     def get_joystick_buttons(self):
         for event in pygame.event.get():
             # print(event)
@@ -28,15 +33,26 @@ class Controller:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    self.listofpressedbuttons += ["down"]
+                    self.remember_keyboard += ["down"]
                 if event.key == pygame.K_UP:
-                    self.listofpressedbuttons += ["B"]
+                    self.remember_keyboard += ["B"]
                 if event.key == pygame.K_RIGHT:
-                    self.listofpressedbuttons += ["right"]
+                    self.remember_keyboard += ["right"]
                 if event.key == pygame.K_LEFT:
-                    self.listofpressedbuttons += ["left"]
+                    self.remember_keyboard += ["left"]
                 if event.key == pygame.K_RETURN:
-                    self.listofpressedbuttons += ["Start"]
+                    self.remember_keyboard += ["Start"]
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_DOWN:
+                    self.remember_keyboard.remove("down")
+                if event.key == pygame.K_UP:
+                    self.remember_keyboard.remove("B")
+                if event.key == pygame.K_RIGHT:
+                    self.remember_keyboard.remove("right")
+                if event.key == pygame.K_LEFT:
+                    self.remember_keyboard.remove("left")
+                if event.key == pygame.K_RETURN:
+                    self.remember_keyboard.remove("Start")
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     self.listofpressedbuttons += ["A"]
@@ -86,14 +102,19 @@ class Controller:
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
                     if event.value > 0.4:
-                        self.listofpressedbuttons += ["right"]
+                        if  "right" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["right"]
                     elif event.value < -0.4:
-                        self.listofpressedbuttons += ["left"]
+                        if "left" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["left"]
                 if event.axis == 1:
                     if event.value > 0.4:
-                        self.listofpressedbuttons += ["down"]
+                        if  "down" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["down"]
                     if event.value < -0.4:
-                        self.listofpressedbuttons += ["up"]
+                        if "up" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["up"]
+
             elif event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
                     self.listofpressedbuttons += ["right"]
@@ -103,6 +124,8 @@ class Controller:
                     self.listofpressedbuttons += ["up"]
                 elif event.value[1] == -1:
                     self.listofpressedbuttons += ["down"]
+        self.listofpressedbuttons += self.remember_keyboard
+        print(self.remember_keyboard)
 
     def add_action(self, action):
         self.listofpressedbuttons += [action]
