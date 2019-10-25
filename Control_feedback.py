@@ -7,8 +7,9 @@ class FakeController:
 class Controller:
     def __init__(self):
         self.running = True
-        pygame.joystick.init()
         self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+        for joystick in self.joysticks:
+            joystick.init()
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
 
