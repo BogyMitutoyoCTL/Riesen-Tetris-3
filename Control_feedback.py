@@ -130,7 +130,7 @@ class Controller:
                 elif event.value[1] == -1:
                     self.listofpressedbuttons += ["down"]
         self.listofpressedbuttons += self.remember_keyboard
-        print(self.remember_keyboard)
+        # print(self.remember_keyboard)
 
     def add_action(self, action):
         self.listofpressedbuttons += [action]
