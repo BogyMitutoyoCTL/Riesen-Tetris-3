@@ -1,9 +1,5 @@
 import pygame
 
-class FakeController:
-    def pressed(self):
-        return ["down"]
-
 class Controller:
     def __init__(self):
         self.running = True
@@ -12,7 +8,6 @@ class Controller:
             joystick.init()
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
-
 
     def pressed(self):
         self.get_joystick_buttons()
@@ -26,13 +21,12 @@ class Controller:
         self.listofreleasedbuttons = []
         return temp
 
-
     def get_joystick_buttons(self):
         for event in pygame.event.get():
-            #print(event)
+            # print(event)
             if event.type == pygame.QUIT:
                 self.running = False
-            elif event.type == pygame.KEYDOWN: 
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
                     self.listofpressedbuttons += ["down"]
                 if event.key == pygame.K_UP:
@@ -97,13 +91,16 @@ class Controller:
                         self.listofpressedbuttons += ["left"]
                 if event.axis == 1:
                     if event.value > 0.4:
-                        self.listofpressedbuttons +=["down"]
+                        self.listofpressedbuttons += ["down"]
                     if event.value < -0.4:
-                        self.listofpressedbuttons +=["up"]
+                        self.listofpressedbuttons += ["up"]
+
+    def add_action(self, action):
+        self.listofpressedbuttons += [action]
 
 
 if __name__ == "__main__":
-    background_colour = (255,255,255)
+    background_colour = (255, 255, 255)
     (width, height) = (300, 200)
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Tutorial 1')
