@@ -22,6 +22,18 @@ def start_screen(playground, painter, controller):
             painter.paint(playground)
             break
 
+def game_over_screen(playground, leonardo, points, sounds, controller):
+    h = Highscore("highscore.txt", leonardo, sounds)
+    h.handle_highscore("name", points.points)
+
+    while True:
+        buttons = controller.pressed()
+        if "Start" in buttons:
+            playground.clear()
+            painter.paint(playground)
+            break
+
+
 
 def get_block_after_action(current_block, action):
     future_block = current_block.clone()  # type: Tetrisblock.Tetrisblock
@@ -107,11 +119,9 @@ def play_game(playground, clock, painter, leonardo, controller: Control_feedback
             controller.add_action("down")
             action_counter = 0
 
-    h = Highscore()
-    h.load_points("etr")
-    h.save_points("etr", "noname", points.points)
     walkman.stop()
 
+    game_over_screen(playground, leonardo, points, sounds, controller)
 
 def draw(current_block, painter, playground):
     playground.put_block(current_block)
