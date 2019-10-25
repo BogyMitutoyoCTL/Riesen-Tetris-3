@@ -68,52 +68,33 @@ def play_game(playground, clock, painter, leonardo, controller: Control_feedback
     while not game_over:
         leonardo.draw(str(points.points), next_block)
 
-        # ermittle die auszuführenden Aktionen
+
         actions = controller.pressed()
-        # für jede einzelne Aktion
         for action in actions:
-        #      falls "nach unten" gedrückt oder "nach unten" fällt
             future_block = get_block_after_action(current_block, action)
             executable = not playground.collieds(future_block)
             if action == "down":
-        #            falls executable:
                 if executable:
-        #                  tu es
                     current_block = future_block
-        #            else: (Kollision)
-                else: # oh no, we have a collision
-        #                  f = check full lines
+
+                else:
                     playground.put_block(current_block)
                     full_line_count = handle_full_lines(playground, points, sound)
-        #                  falls (y+f)<0:
                     if current_block.y + full_line_count < 0:
-        #                         game over
                         game_over = True
                         sounds.game_over()
-        #                  else
                     else:
-        #                         neuer Block
-                        current_block, next_block = switch_blocks(next_block)
-
                         if current_block.y < 5:
                             sound.warning()
                         else:
                             sound.reached_limit()
-        #      else (links, rechts, drehen)
+                        current_block, next_block = switch_blocks(next_block)
             else:
-        #          falls executable:
                 if executable:
-        #              tu es
                     current_block = future_block
-        #          else
-        #              nix tun
-        #     draw
         draw(current_block, painter, playground)
-        #
-        #clock.tick
         clock.tick((16.5 / 10000) * points.points + 3.5)
 
-        #jedes vierte Mal: füge eine "down" Aktion hinzu (bisher: FakeController)
         action_counter += 1
         if action_counter == 4:
             controller.add_action("down")
