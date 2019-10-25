@@ -94,6 +94,15 @@ class Controller:
                         self.listofpressedbuttons += ["down"]
                     if event.value < -0.4:
                         self.listofpressedbuttons += ["up"]
+            elif event.type == pygame.JOYHATMOTION:
+                if event.value[0] == 1:
+                    self.listofpressedbuttons += ["right"]
+                elif event.value[0] == -1:
+                    self.listofpressedbuttons += ["left"]
+                if event.value[1] == 1:
+                    self.listofpressedbuttons += ["up"]
+                elif event.value[1] == -1:
+                    self.listofpressedbuttons += ["down"]
 
     def add_action(self, action):
         self.listofpressedbuttons += [action]
