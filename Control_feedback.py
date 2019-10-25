@@ -119,6 +119,16 @@ class Controller:
                     if event.value < -0.4:
                         if "up" not in self.listofpressedbuttons:
                             self.listofpressedbuttons += ["up"]
+
+            elif event.type == pygame.JOYHATMOTION:
+                if event.value[0] == 1:
+                    self.listofpressedbuttons += ["right"]
+                elif event.value[0] == -1:
+                    self.listofpressedbuttons += ["left"]
+                if event.value[1] == 1:
+                    self.listofpressedbuttons += ["up"]
+                elif event.value[1] == -1:
+                    self.listofpressedbuttons += ["down"]
         self.listofpressedbuttons += self.remember_keyboard
         print(self.remember_keyboard)
 
