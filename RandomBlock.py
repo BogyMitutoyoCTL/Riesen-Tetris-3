@@ -10,6 +10,7 @@ class RandomBlock:
         R = randint(self.minimum, self.maximum)
         RndBlock = Tetrisblock.Blocklist[R]
         RndBlock.random_orientation()
+        RndBlock.random_color()
         cloned_block = RndBlock.clone()
         field = RndBlock.orientations[0]
         lines = len(field)
