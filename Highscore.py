@@ -5,9 +5,10 @@ class Highscore:
         self.name = ""
 
     def load_points(self, filename):
-        load_points = open(filename, "w+")
+        load_points = open(filename, "r")
         self.name = load_points.readline()
-        self.points = load_points.readline()
+        self.points = int(load_points.readline())
+        load_points.close()
 
     def save_points(self, filename, name, points):
         self.load_points(filename)
@@ -17,9 +18,4 @@ class Highscore:
             save_points.writelines(str(name) + "\n")
             save_points.writelines(str(points))
             self.name = name
-
-h = Highscore()
-
-h.load_points("etr")
-
-
+            save_points.close()

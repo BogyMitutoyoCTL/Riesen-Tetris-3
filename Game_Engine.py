@@ -26,50 +26,56 @@ def start_screen(playground, painter, controller):
 
 def play_game(playground, clock, painter, leonardo, controller, sound):
     objekt = RandomBlock.RandomBlock()
-    currentBlock = objekt.get_random_block()
-    nextBlock = objekt.get_random_block()
+    current_block = objekt.get_random_block()
+    next_block = objekt.get_random_block()
     points = Points.Points()
     sounds = Sound.Sound()
-    Music.Music(0.3)
-    playground.put_block(currentBlock)
-    gameover = False
-    while not gameover:
-        leonardo.draw(str(points.points), nextBlock)
+    walkman = Music.Music(0.3)
+    walkman.start()
+    playground.put_block(current_block)
+    game_over = False
+    while not game_over:
+        leonardo.draw(str(points.points), next_block)
 
         for _ in range(4):
-            future_block, moved_down = control_request(controller, currentBlock)
+            future_block, moved_down = control_request(controller, current_block)
             if playground.collieds(future_block):
-                gameover = handle_collision(currentBlock, playground, points, sound)
-                currentBlock = nextBlock
-                nextBlock = objekt.get_random_block()
+                game_over = handle_collision(current_block, playground, points, sound, moved_down)
+                if moved_down:
+                    current_block = next_block
+                    next_block = objekt.get_random_block()
             else:
-                currentBlock.position = future_block.position
-                currentBlock.orientation = future_block.orientation
-            draw(currentBlock, painter, playground)
-            clock.tick((16.5/10000)*points.points+3.5)
+                current_block.position = future_block.position
+                current_block.orientation = future_block.orientation
+            draw(current_block, painter, playground)
+            clock.tick((16.5 / 10000) * points.points + 3.5)
 
-        tryDown = FakeController()
-        future_block, moved_down = control_request(tryDown, currentBlock)
+        try_down = FakeController()
+        future_block, moved_down = control_request(try_down, current_block)
         if playground.collieds(future_block):
-            gameover = handle_collision(currentBlock, playground, points, sound)
-            currentBlock = nextBlock
-            nextBlock = objekt.get_random_block()
+            game_over = handle_collision(current_block, playground, points, sound, moved_down)
+            if moved_down:
+                current_block = next_block
+                next_block = objekt.get_random_block()
         else:
-            currentBlock.position = future_block.position
-            currentBlock.orientation = future_block.orientation
+            current_block.position = future_block.position
+            current_block.orientation = future_block.orientation
             handle_full_lines(playground, points, sounds)
 
     h = Highscore()
     h.load_points("etr")
     h.save_points("etr", "noname", points.points)
+    walkman.stop()
 
-def handle_collision(currentBlock, playground, points, sound):
+
+def handle_collision(currentBlock, playground, points, sound, moved_down):
     handle_full_lines(playground, points, sound)
     if currentBlock.position[1] < 0:
         sound.game_over()
         return True
     else:
-        playground.put_block(currentBlock)
+        if moved_down:
+            playground.put_block(currentBlock)
 
         if currentBlock.position[1] < 5:
             sound.warning()
@@ -79,10 +85,10 @@ def handle_collision(currentBlock, playground, points, sound):
     return False
 
 
-def draw(currentBlock, painter, playground):
-    playground.put_block(currentBlock)
+def draw(current_block, painter, playground):
+    playground.put_block(current_block)
     painter.paint(playground)
-    playground.remove_block(currentBlock)
+    playground.remove_block(current_block)
 
 
 def handle_full_lines(playground, points, sound):
@@ -100,10 +106,10 @@ def handle_full_lines(playground, points, sound):
             sound.complete_line4()
 
 
-def control_request(controller, currentBlock):
+def control_request(controller, current_block):
     buttons = controller.pressed()
-    future_orientation = currentBlock.orientation
-    future_x, future_y = currentBlock.position
+    future_orientation = current_block.orientation
+    future_x, future_y = current_block.position
     block_moved_down = False
     if "right" in buttons:
         future_x = future_x + 1
@@ -115,15 +121,15 @@ def control_request(controller, currentBlock):
         future_y = future_y + 1
         block_moved_down = True
     if "B" in buttons:
-        currentBlock.turnright()
-        future_orientation = currentBlock.orientation
-        currentBlock.turnleft()
+        current_block.turnright()
+        future_orientation = current_block.orientation
+        current_block.turnleft()
     if "Y" in buttons:
-        currentBlock.turnleft()
-        future_orientation = currentBlock.orientation
-        currentBlock.turnright()
+        current_block.turnleft()
+        future_orientation = current_block.orientation
+        current_block.turnright()
 
-    future_block = currentBlock.clone()
+    future_block = current_block.clone()
     future_block.position = future_x, future_y
     future_block.orientation = future_orientation
     return future_block, block_moved_down
