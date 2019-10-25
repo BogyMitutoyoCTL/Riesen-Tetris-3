@@ -148,13 +148,13 @@ class Playground:
             row_number_of_tetrisblock += 1
 
         # Jetzt haben wir 9 Farben in resulting_colors
-        es_gab_eine_kollision = False  # Annahme
+        there_was_a_collision = False  # Annahme
         for farbe in resulting_colors:
             if farbe == BLACK:
                 pass
             else:
-                es_gab_eine_kollision = es_gab_eine_kollision or True
-        return es_gab_eine_kollision
+                there_was_a_collision = there_was_a_collision or True
+        return there_was_a_collision
 
 
 if __name__ == "__main__":

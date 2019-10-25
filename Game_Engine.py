@@ -35,9 +35,9 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
         leonardo.draw(str(points.points), nextBlock)
 
         for _ in range(4):
-            future_block = control_request(controller, currentBlock)
+            future_block, moved_down = control_request(controller, currentBlock)
             if playground.collieds(future_block):
-                currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound)
+                currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down)
             else:
                 currentBlock.position = future_block.position
                 currentBlock.orientation = future_block.orientation
@@ -45,29 +45,29 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
             clock.tick(points.points / 100 + 2)
 
         tryDown = FakeController()
-        future_block = control_request(tryDown, currentBlock)
+        future_block, moved_down = control_request(tryDown, currentBlock)
         if playground.collieds(future_block):
-            currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound)
+            currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down)
         else:
             currentBlock.position = future_block.position
             currentBlock.orientation = future_block.orientation
             handle_full_lines(playground, points, sounds)
 
 
-def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound):
+def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down):
     handle_full_lines(playground, points, sound)
     if currentBlock.position[1] < 0:
         sound.game_over()
     else:
-        playground.put_block(currentBlock)
+        if moved_down == True:
+            playground.put_block(currentBlock)
+            currentBlock = nextBlock
+            nextBlock = objekt.get_random_block()
 
         if currentBlock.position[1] < 5:
             sound.warning()
         else:
             sound.reached_limit()
-
-        currentBlock = nextBlock
-        nextBlock = objekt.get_random_block()
 
     return currentBlock, nextBlock
 
@@ -97,15 +97,14 @@ def control_request(controller, currentBlock):
     buttons = controller.pressed()
     future_orientation = currentBlock.orientation
     future_x, future_y = currentBlock.position
+    block_moved_down = False
     if "right" in buttons:
         future_x = future_x + 1
-        print("right")
     if "left" in buttons:
         future_x = future_x - 1
-        print("left")
     if "down" in buttons:
         future_y = future_y + 1
-        print("down")
+        block_moved_down = True
     if "B" in buttons:
         currentBlock.turnright()
         future_orientation = currentBlock.orientation
@@ -118,7 +117,7 @@ def control_request(controller, currentBlock):
     future_block = currentBlock.clone()
     future_block.position = future_x, future_y
     future_block.orientation = future_orientation
-    return future_block
+    return future_block, block_moved_down
 
 
 pygame.init()
