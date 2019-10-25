@@ -102,14 +102,18 @@ class Controller:
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
                     if event.value > 0.4:
-                        self.listofpressedbuttons += ["right"]
+                        if  "right" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["right"]
                     elif event.value < -0.4:
-                        self.listofpressedbuttons += ["left"]
+                        if "left" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["left"]
                 if event.axis == 1:
                     if event.value > 0.4:
-                        self.listofpressedbuttons += ["down"]
+                        if  "down" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["down"]
                     if event.value < -0.4:
-                        self.listofpressedbuttons += ["up"]
+                        if "up" not in self.listofpressedbuttons:
+                            self.listofpressedbuttons += ["up"]
         self.listofpressedbuttons += self.remember_keyboard
         print(self.remember_keyboard)
 
