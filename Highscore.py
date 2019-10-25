@@ -1,5 +1,6 @@
 from LED_Matrix_Maler import Painter
 from Sound import Sound
+import os.path
 
 
 class Highscore:
@@ -19,17 +20,17 @@ class Highscore:
         self.leonardo.write_text("* HS:" + str(self.points))
 
     def load_points(self):
-        load_points = open(self.filename, "r")
+        if os.path.isfile(self.filename):
+            load_points = open(self.filename, "r")
+            temp_name = load_points.readline()
+            temp_points = load_points.readline()
+            load_points.close()
 
-        temp_name = load_points.readline()
-        temp_points = load_points.readline()
-        load_points.close()
+            if len(temp_name) > 0:
+                self.name = temp_name
 
-        if len(temp_name) > 0:
-            self.name = temp_name
-
-        if len(temp_points) > 0:
-            self.points = int(temp_points)
+            if len(temp_points) > 0:
+                self.points = int(temp_points)
 
     def save_points(self, name, points: int):
         self.points = points
@@ -43,6 +44,8 @@ class Highscore:
 
 if __name__ == "__main__":
     h = Highscore("highscore.txt", None, None)
+
+    h.save_points("other name", 2000)
 
     print(h.points)
     print(h.name)
