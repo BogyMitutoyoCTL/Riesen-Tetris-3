@@ -50,7 +50,8 @@ def get_block_after_action(current_block, action):
     return future_block
 
 
-def switch_blocks(next_block):
+def switch_blocks(next_block, points):
+    points.new_block()
     return next_block, RandomBlock.RandomBlock().get_random_block()
 
 
@@ -88,7 +89,7 @@ def play_game(playground, clock, painter, leonardo, controller: Control_feedback
                             sound.warning()
                         else:
                             sound.reached_limit()
-                        current_block, next_block = switch_blocks(next_block)
+                        current_block, next_block = switch_blocks(next_block, points)
             else:
                 if executable:
                     current_block = future_block

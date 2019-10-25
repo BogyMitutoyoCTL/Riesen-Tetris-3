@@ -15,3 +15,7 @@ class Points:
     def traversed_lines(self, y):
         if y > 0:
             self.points = self.points + y
+
+    def new_block(self):
+        self.points = self.points + 2
+
