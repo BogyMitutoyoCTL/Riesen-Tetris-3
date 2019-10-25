@@ -41,18 +41,9 @@ class Controller:
                 if event.key == pygame.K_LEFT:
                     self.remember_keyboard += ["left"]
                 if event.key == pygame.K_RETURN:
-                    self.remember_keyboard += ["Start"]
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN:
-                    self.remember_keyboard.remove("down")
-                if event.key == pygame.K_UP:
-                    self.remember_keyboard.remove("B")
-                if event.key == pygame.K_RIGHT:
-                    self.remember_keyboard.remove("right")
-                if event.key == pygame.K_LEFT:
-                    self.remember_keyboard.remove("left")
-                if event.key == pygame.K_RETURN:
-                    self.remember_keyboard.remove("Start")
+                    self.listofpressedbuttons += ["Start"]
+                if event.key == pygame.K_SPACE:
+                    self.listofpressedbuttons += ["Pause"]
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     self.listofpressedbuttons += ["A"]
