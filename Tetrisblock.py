@@ -48,11 +48,11 @@ class Tetrisblock:
     def random_orientation(self):
         self.orientation = randint(0, 3)
 
-    def random_color(self):
-        color_list = list(
-            [(0, 255, 255), (255, 0, 255), (0, 255, 0), (0, 0, 255), (255, 0, 0), (255, 255, 0), (255, 127, 39)])
-        number_of_colors = len(color_list)
-        self.color = color_list[randint(0, number_of_colors - 1)]
+    #def random_color(self):
+        #color_list = list(
+            #[(0, 255, 255), (255, 0, 255), (0, 255, 0), (0, 0, 255), (255, 0, 0), (255, 255, 0), (255, 127, 39)])
+        #number_of_colors = len(color_list)
+        #self.color = color_list[randint(0, number_of_colors - 1)]
 
     def moveright(self):
         self.position = self.x + 1, self.y
