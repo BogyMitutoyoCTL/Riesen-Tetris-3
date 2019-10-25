@@ -39,11 +39,3 @@ class Painter:
     def write_text(self, letters):
         with canvas(self.device) as draw:
             text(draw, (0, 0), letters, fill="white", font=proportional(TINY_FONT))
-
-
-if __name__ == "__main__":
-    Leonardo = Painter()
-    Leonardo.draw(20, RandomBlock.RandomBlock().get_random_block())
-    time.sleep(5)
-    Leonardo.write_text("*Options")
-    time.sleep(20)

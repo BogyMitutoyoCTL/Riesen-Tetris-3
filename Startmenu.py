@@ -2,8 +2,10 @@
 import time
 
 import Playground
+import RandomBlock
 import Tetrisblock
 import Ws2812Painter
+from LED_Matrix_Maler import Painter
 
 
 class Startmenu:
@@ -75,6 +77,8 @@ class Startmenu:
         self.playground.set_pixel(8, 11, (255, 255, 0))
         self.playground.set_pixel(9, 8, (255, 255, 0))
 
+        Leonardo = Painter()
+        Leonardo.write_text("* START")
 
 if __name__ == "__main__":
     painter = Ws2812Painter.Ws2812Painter()
