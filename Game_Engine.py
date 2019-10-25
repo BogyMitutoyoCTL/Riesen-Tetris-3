@@ -23,6 +23,7 @@ def start_screen(playground, painter, controller):
             painter.paint(playground)
             break
 
+
 def game_over_screen(playground, leonardo, points, sounds, controller):
     h = Highscore("highscore.txt", leonardo, sounds)
     h.handle_highscore("name", points.points)
@@ -33,7 +34,6 @@ def game_over_screen(playground, leonardo, points, sounds, controller):
             playground.clear()
             painter.paint(playground)
             break
-
 
 
 def play_game(playground, clock, painter, leonardo, controller, sound):
@@ -77,6 +77,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     walkman.stop()
 
     game_over_screen(playground, leonardo, points, sounds, controller)
+
 
 def handle_collision(currentBlock, playground, points, sound, moved_down):
     handle_full_lines(playground, points, sound)

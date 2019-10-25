@@ -16,7 +16,7 @@ class Highscore:
             self.sounds.new_highscore()
             self.save_points(name, points)
 
-        self.leonardo.write_text("* HS:" + str(self.points))
+        self.leonardo.write_text("HS:" + str(self.points))
 
     def load_points(self):
         load_points = open(self.filename, "r")

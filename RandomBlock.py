@@ -1,6 +1,7 @@
 from random import randint
 import Tetrisblock
 
+
 class RandomBlock:
     def __init__(self):
         self.minimum = 0
@@ -14,6 +15,5 @@ class RandomBlock:
         cloned_block = RndBlock.clone()
         field = RndBlock.orientations[0]
         lines = len(field)
-        cloned_block.position = 4, lines*-1
+        cloned_block.position = 4, lines * -1
         return cloned_block
-
