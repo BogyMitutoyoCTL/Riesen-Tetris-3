@@ -10,6 +10,7 @@ import Tetrisblock
 import Control_feedback
 import Sound
 from Control_feedback import FakeController
+from Highscore import Highscore
 
 
 def start_screen(playground, painter, controller):
@@ -34,7 +35,6 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     gameover = False
     while not gameover:
         leonardo.draw(str(points.points), nextBlock)
-
         for _ in range(4):
             future_block = control_request(controller, currentBlock)
             if playground.collieds(future_block):
@@ -58,6 +58,9 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
             currentBlock.orientation = future_block.orientation
             handle_full_lines(playground, points, sounds)
 
+    h = Highscore()
+    h.load_points("etr")
+    h.save_points("etr", "noname", points.points)
 
 def handle_collision(currentBlock, playground, points, sound):
     handle_full_lines(playground, points, sound)
