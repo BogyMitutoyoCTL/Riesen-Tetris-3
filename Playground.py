@@ -121,20 +121,20 @@ class Playground:
                 original_color = self.coordinate_system[original_y][original_x]
                 shadow.set_pixel(original_x + bordersize, original_y + bordersize, original_color)
 
-        drei_mal_drei_feld = tetrisblock.orientations[tetrisblock.orientation]
-        feld_linker_rand, feld_oberer_rand = tetrisblock.position
+        three_by_three_field = tetrisblock.orientations[tetrisblock.orientation]
+        left_field_side, top_field_side = tetrisblock.position
 
         # Ermitteln der 9 Ergebnisfarben nach der Multiplikation
         resulting_colors = []
         row_number_of_tetrisblock = 0
-        for zeile_aus_feld in drei_mal_drei_feld:
+        for line_out_of_field in three_by_three_field:
             column_number_of_zeile = 0
-            for spalte_aus_feld_null_oder_eins in zeile_aus_feld:
-                position_in_shadow_system_x = feld_linker_rand + column_number_of_zeile + bordersize
-                position_in_shadow_system_y = feld_oberer_rand + row_number_of_tetrisblock + bordersize
+            for colum_out_of_field_zero_or_one in line_out_of_field:
+                position_in_shadow_system_x = left_field_side + column_number_of_zeile + bordersize
+                position_in_shadow_system_y = top_field_side + row_number_of_tetrisblock + bordersize
                 color_at_that_position = shadow.coordinate_system[position_in_shadow_system_y][
                     position_in_shadow_system_x]
-                if spalte_aus_feld_null_oder_eins == 0:
+                if colum_out_of_field_zero_or_one == 0:
                     # Jede Farbe multipliziert mit 0 ergibt schwarz
                     resulting_colors += [BLACK]
                 else:
