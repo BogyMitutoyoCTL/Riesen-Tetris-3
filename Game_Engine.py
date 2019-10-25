@@ -28,6 +28,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     currentBlock = objekt.get_random_block()
     nextBlock = objekt.get_random_block()
     points = Points.Points()
+    sounds = Sound.Sound()
     Music.Music(0.3)
     playground.put_block(currentBlock)
     gameover = False
@@ -55,6 +56,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
         else:
             currentBlock.position = future_block.position
             currentBlock.orientation = future_block.orientation
+            handle_full_lines(playground, points, sounds)
 
 
 def handle_collision(currentBlock, playground, points, sound):
