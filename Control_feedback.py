@@ -37,6 +37,8 @@ class Controller:
                     self.listofpressedbuttons += ["left"]
                 if event.key == pygame.K_RETURN:
                     self.listofpressedbuttons += ["Start"]
+                if event.key == pygame.K_SPACE:
+                    self.listofpressedbuttons += ["Pause"]
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     self.listofpressedbuttons += ["A"]
