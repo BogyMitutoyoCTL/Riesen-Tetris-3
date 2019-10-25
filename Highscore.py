@@ -22,5 +22,4 @@ h = Highscore()
 
 h.load_points("etr")
 
-print(h.points)
-print(h.name)
+

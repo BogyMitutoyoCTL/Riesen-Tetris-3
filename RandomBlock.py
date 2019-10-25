@@ -10,7 +10,8 @@ class RandomBlock:
     def get_random_block(self):
         R = randint(self.minimum, self.maximum)
         RndBlock = Tetrisblock.Blocklist[R]
+        cloned_block = RndBlock.clone()
         field=RndBlock.orientations[0]
         lines=len(field)
-        RndBlock.position = 4, lines*-1
-        return RndBlock
+        cloned_block.position = 4, lines*-1
+        return cloned_block

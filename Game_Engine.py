@@ -10,9 +10,10 @@ import Tetrisblock
 import Control_feedback
 import Sound
 from Control_feedback import FakeController
+from Highscore import Highscore
 
 
-def before_game(playground, painter, controller):
+def start_screen(playground, painter, controller):
     s = Startmenu.Startmenu(playground)
     painter.paint(playground)
     while True:
@@ -31,45 +32,51 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
     sounds = Sound.Sound()
     Music.Music(0.3)
     playground.put_block(currentBlock)
-    while True:
+    gameover = False
+    while not gameover:
         leonardo.draw(str(points.points), nextBlock)
 
         for _ in range(4):
             future_block, moved_down = control_request(controller, currentBlock)
             if playground.collieds(future_block):
-                currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down)
+                gameover = handle_collision(currentBlock, playground, points, sound)
+                currentBlock = nextBlock
+                nextBlock = objekt.get_random_block()
             else:
                 currentBlock.position = future_block.position
                 currentBlock.orientation = future_block.orientation
             draw(currentBlock, painter, playground)
-            clock.tick(points.points / 100 + 2)
+            clock.tick((16.5/10000)*points.points+3.5)
 
         tryDown = FakeController()
         future_block, moved_down = control_request(tryDown, currentBlock)
         if playground.collieds(future_block):
-            currentBlock, nextBlock = handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down)
+            gameover = handle_collision(currentBlock, playground, points, sound)
+            currentBlock = nextBlock
+            nextBlock = objekt.get_random_block()
         else:
             currentBlock.position = future_block.position
             currentBlock.orientation = future_block.orientation
             handle_full_lines(playground, points, sounds)
 
+    h = Highscore()
+    h.load_points("etr")
+    h.save_points("etr", "noname", points.points)
 
-def handle_collision(currentBlock, nextBlock, objekt, playground, points, sound, moved_down):
+def handle_collision(currentBlock, playground, points, sound):
     handle_full_lines(playground, points, sound)
     if currentBlock.position[1] < 0:
         sound.game_over()
+        return True
     else:
-        if moved_down == True:
-            playground.put_block(currentBlock)
-            currentBlock = nextBlock
-            nextBlock = objekt.get_random_block()
+        playground.put_block(currentBlock)
 
         if currentBlock.position[1] < 5:
             sound.warning()
         else:
             sound.reached_limit()
 
-    return currentBlock, nextBlock
+    return False
 
 
 def draw(currentBlock, painter, playground):
@@ -100,8 +107,10 @@ def control_request(controller, currentBlock):
     block_moved_down = False
     if "right" in buttons:
         future_x = future_x + 1
+        print("right")
     if "left" in buttons:
         future_x = future_x - 1
+        print("left")
     if "down" in buttons:
         future_y = future_y + 1
         block_moved_down = True
@@ -136,5 +145,6 @@ controller = Control_feedback.Controller()
 painter = Ws2812Painter.Ws2812Painter()
 sound = Sound.Sound()
 
-before_game(playground, painter, controller)
-play_game(playground, clock, painter, leonardo, controller, sound)
+while True:
+    start_screen(playground, painter, controller)
+    play_game(playground, clock, painter, leonardo, controller, sound)
