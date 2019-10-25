@@ -45,7 +45,7 @@ def play_game(playground, clock, painter, leonardo, controller, sound):
                 currentBlock.position = future_block.position
                 currentBlock.orientation = future_block.orientation
             draw(currentBlock, painter, playground)
-            clock.tick(points.points / 100 + 10)
+            clock.tick((16.5/10000)*points.points+3.5)
 
         tryDown = FakeController()
         future_block = control_request(tryDown, currentBlock)
