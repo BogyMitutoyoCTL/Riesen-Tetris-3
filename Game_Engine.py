@@ -10,7 +10,6 @@ import Tetrisblock
 import Control_feedback
 import Sound
 from Highscore import Highscore
-import os
 
 
 def start_screen(playground, painter, controller):
@@ -51,7 +50,8 @@ def get_block_after_action(current_block, action):
     return future_block
 
 
-def switch_blocks(next_block):
+def switch_blocks(next_block, points):
+    points.new_block()
     return next_block, RandomBlock.RandomBlock().get_random_block()
 
 
