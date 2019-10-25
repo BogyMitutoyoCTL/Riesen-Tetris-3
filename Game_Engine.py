@@ -99,13 +99,10 @@ def control_request(controller, currentBlock):
     future_x, future_y = currentBlock.position
     if "right" in buttons:
         future_x = future_x + 1
-        print("right")
     if "left" in buttons:
         future_x = future_x - 1
-        print("left")
     if "down" in buttons:
         future_y = future_y + 1
-        print("down")
     if "B" in buttons:
         currentBlock.turnright()
         future_orientation = currentBlock.orientation
