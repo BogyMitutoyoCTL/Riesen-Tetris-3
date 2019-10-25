@@ -8,6 +8,7 @@ class Controller:
             joystick.init()
         self.listofpressedbuttons = []
         self.listofreleasedbuttons = []
+        self.remember_keyboard = []
 
     def pressed(self):
         self.get_joystick_buttons()
@@ -21,6 +22,10 @@ class Controller:
         self.listofreleasedbuttons = []
         return temp
 
+   # def joystick_simple_press(self):
+        # wenn Taste gedrückt gehalten wird
+            # solange es "True" ist schleife den output --> einen dauer output
+
     def get_joystick_buttons(self):
         for event in pygame.event.get():
             # print(event)
@@ -28,13 +33,13 @@ class Controller:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    self.listofpressedbuttons += ["down"]
+                    self.remember_keyboard += ["down"]
                 if event.key == pygame.K_UP:
-                    self.listofpressedbuttons += ["B"]
+                    self.remember_keyboard += ["B"]
                 if event.key == pygame.K_RIGHT:
-                    self.listofpressedbuttons += ["right"]
+                    self.remember_keyboard += ["right"]
                 if event.key == pygame.K_LEFT:
-                    self.listofpressedbuttons += ["left"]
+                    self.remember_keyboard += ["left"]
                 if event.key == pygame.K_RETURN:
                     self.listofpressedbuttons += ["Start"]
                 if event.key == pygame.K_SPACE:
@@ -96,6 +101,8 @@ class Controller:
                         self.listofpressedbuttons += ["down"]
                     if event.value < -0.4:
                         self.listofpressedbuttons += ["up"]
+        self.listofpressedbuttons += self.remember_keyboard
+        print(self.remember_keyboard)
 
     def add_action(self, action):
         self.listofpressedbuttons += [action]
