@@ -16,9 +16,12 @@ RestartSec=20
 User=root
 Group=root
 Environment=SYSTEMD_LOG_LEVEL=debug
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/pi/.Xauthority"
+
 
 [Install]
-WantedBy=sound.target
+WantedBy=graphical.target
 Alias=LED.service
 
 
