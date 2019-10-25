@@ -95,7 +95,7 @@ def play_game(playground, clock, painter, leonardo, controller: Control_feedback
                                 sound.warning()
                             else:
                                 sound.reached_limit()
-                            current_block, next_block = switch_blocks(next_block)
+                            current_block, next_block = switch_blocks(next_block, points)
 
                 else:
                     if executable:
