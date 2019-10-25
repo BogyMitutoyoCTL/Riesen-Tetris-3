@@ -43,3 +43,13 @@ class Sound:
 
     def set_volume(self, volume):
         self.volume = volume
+
+    def play_sound_for_lines(self, line_count):
+        if line_count == 1:
+            self.complete_line1()
+        if line_count == 2:
+            self.complete_line2()
+        if line_count == 3:
+            self.complete_line3()
+        if line_count == 4:
+            self.complete_line4()
